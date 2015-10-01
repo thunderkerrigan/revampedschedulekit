@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15B22c" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -682,7 +682,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <rect key="contentRect" x="93" y="178" width="1160" height="600"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="1160" height="600"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -699,6 +699,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="21" id="Qma-Mk-xVv"/>
                                         </constraints>
+                                        <animations/>
                                         <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSAddTemplate" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="TmC-Rm-WQl">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="systemBold" size="12"/>
@@ -712,6 +713,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="21" id="Laf-Uf-bsD"/>
                                         </constraints>
+                                        <animations/>
                                         <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Nb2-W1-fx4">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="systemBold" size="12"/>
@@ -729,6 +731,7 @@
                                                 <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="70" viewBased="YES" id="4QN-O4-izh">
                                                     <rect key="frame" x="0.0" y="0.0" width="201" height="0.0"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                    <animations/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <tableViewGridLines key="gridStyleMask" horizontal="YES"/>
@@ -751,12 +754,13 @@
                                                                     <rect key="frame" x="1" y="1" width="198" height="70"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
-                                                                        <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yzg-Pn-Zy4">
+                                                                        <datePicker verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yzg-Pn-Zy4">
                                                                             <rect key="frame" x="7" y="44" width="114" height="22"/>
+                                                                            <animations/>
                                                                             <datePickerCell key="cell" controlSize="small" alignment="left" drawsBackground="NO" id="hp1-NF-fjD">
                                                                                 <font key="font" metaFont="smallSystem"/>
                                                                                 <calendarDate key="date" timeIntervalSinceReferenceDate="-595929600" calendarFormat="%Y-%m-%d %H:%M:%S %z">
-                                                                                    <!--1982-02-12 16:00:00 +0000-->
+                                                                                    <!--1982-02-12 08:00:00 -0800-->
                                                                                     <timeZone key="timeZone" name="US/Pacific"/>
                                                                                 </calendarDate>
                                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -769,6 +773,7 @@
                                                                         </datePicker>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UeM-12-2Xr">
                                                                             <rect key="frame" x="5" y="25" width="192" height="23"/>
+                                                                            <animations/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="cFj-My-MAd">
                                                                                 <font key="font" size="15" name="HelveticaNeue-Light"/>
                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -785,13 +790,15 @@
                                                                         </textField>
                                                                         <slider horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zys-qM-a1E">
                                                                             <rect key="frame" x="175" y="43" width="22" height="22"/>
-                                                                            <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" minValue="15" maxValue="300" doubleValue="30.833333333333336" tickMarkPosition="above" numberOfTickMarks="19" allowsTickMarkValuesOnly="YES" sliderType="circular" id="jOc-xR-CKf"/>
+                                                                            <animations/>
+                                                                            <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" minValue="15" maxValue="300" doubleValue="30.833333333333336" numberOfTickMarks="19" allowsTickMarkValuesOnly="YES" sliderType="circular" id="jOc-xR-CKf"/>
                                                                             <connections>
                                                                                 <binding destination="IDe-0S-Y3Q" name="value" keyPath="objectValue.duration" id="Rwk-77-uJs"/>
                                                                             </connections>
                                                                         </slider>
-                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aV1-Tx-MRi">
+                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aV1-Tx-MRi">
                                                                             <rect key="frame" x="142" y="47" width="27" height="14"/>
+                                                                            <animations/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="180'" id="tPC-Gb-5GP">
                                                                                 <font key="font" metaFont="smallSystem"/>
                                                                                 <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -807,6 +814,7 @@
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="030-KV-scf">
                                                                             <rect key="frame" x="5" y="6" width="162" height="14"/>
+                                                                            <animations/>
                                                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="hSZ-ik-92u">
                                                                                 <font key="font" metaFont="smallSystem"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -819,6 +827,7 @@
                                                                         </textField>
                                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="laE-EV-m9r">
                                                                             <rect key="frame" x="173" y="3" width="24" height="19"/>
+                                                                            <animations/>
                                                                             <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSRefreshFreestandingTemplate" imagePosition="only" alignment="center" borderStyle="border" inset="2" id="BNM-I2-USi">
                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                 <font key="font" metaFont="systemBold" size="12"/>
@@ -840,6 +849,7 @@
                                                                         <constraint firstItem="Zys-qM-a1E" firstAttribute="top" secondItem="IDe-0S-Y3Q" secondAttribute="top" constant="5" id="ufN-pN-dWv"/>
                                                                         <constraint firstItem="Zys-qM-a1E" firstAttribute="leading" secondItem="aV1-Tx-MRi" secondAttribute="trailing" constant="8" symbolic="YES" id="ves-YY-AFh"/>
                                                                     </constraints>
+                                                                    <animations/>
                                                                     <connections>
                                                                         <outlet property="textField" destination="UeM-12-2Xr" id="yGi-iO-e8P"/>
                                                                     </connections>
@@ -853,15 +863,19 @@
                                                     </connections>
                                                 </tableView>
                                             </subviews>
+                                            <animations/>
                                             <nil key="backgroundColor"/>
                                         </clipView>
+                                        <animations/>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="ufY-7u-hsC">
                                             <rect key="frame" x="1" y="119" width="223" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
                                         </scroller>
                                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="2L0-Jr-itq">
                                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
                                         </scroller>
                                     </scrollView>
                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hb7-FI-fiY">
@@ -869,6 +883,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="6f2-g5-aZl"/>
                                         </constraints>
+                                        <animations/>
                                         <popUpButtonCell key="cell" type="recessed" title="By type" bezelStyle="recessed" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="gDN-sp-oxy" id="Af3-Vs-8Xr">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="systemBold" size="12"/>
@@ -897,6 +912,7 @@
                                     <constraint firstAttribute="bottom" secondItem="WCl-Rj-cqg" secondAttribute="bottom" constant="7" id="r09-hz-nkp"/>
                                     <constraint firstItem="vmP-K4-RZT" firstAttribute="leading" secondItem="WCl-Rj-cqg" secondAttribute="trailing" constant="8" symbolic="YES" id="sRC-Zl-3d1"/>
                                 </constraints>
+                                <animations/>
                             </customView>
                             <customView id="9so-2A-iwk">
                                 <rect key="frame" x="202" y="0.0" width="958" height="600"/>
@@ -917,6 +933,7 @@
                                                             <subviews>
                                                                 <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4fd-vU-fyo" customClass="SCKDayView">
                                                                     <rect key="frame" x="0.0" y="0.0" width="251" height="567"/>
+                                                                    <animations/>
                                                                     <connections>
                                                                         <outlet property="eventManager" destination="fy9-p5-faF" id="A3L-si-iHP"/>
                                                                     </connections>
@@ -928,19 +945,24 @@
                                                                 <constraint firstItem="4fd-vU-fyo" firstAttribute="top" secondItem="ilT-9H-Td3" secondAttribute="top" id="Tyz-vx-WZb"/>
                                                                 <constraint firstItem="4fd-vU-fyo" firstAttribute="leading" secondItem="ilT-9H-Td3" secondAttribute="leading" id="rdq-43-VcN"/>
                                                             </constraints>
+                                                            <animations/>
                                                             <color key="backgroundColor" name="controlDarkShadowColor" catalog="System" colorSpace="catalog"/>
                                                         </clipView>
+                                                        <animations/>
                                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="hkH-fm-W7i">
                                                             <rect key="frame" x="1" y="80" width="166" height="15"/>
                                                             <autoresizingMask key="autoresizingMask"/>
+                                                            <animations/>
                                                         </scroller>
                                                         <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="ebT-QE-XTx">
-                                                            <rect key="frame" x="167" y="1" width="15" height="79"/>
+                                                            <rect key="frame" x="235" y="0.0" width="16" height="567"/>
                                                             <autoresizingMask key="autoresizingMask"/>
+                                                            <animations/>
                                                         </scroller>
                                                     </scrollView>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mM5-Xf-Zdj">
                                                         <rect key="frame" x="193" y="6" width="21" height="19"/>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" continuous="YES" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Kv7-zU-uGO">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
@@ -951,6 +973,7 @@
                                                     </button>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GzX-GT-EVJ">
                                                         <rect key="frame" x="222" y="6" width="21" height="19"/>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSAddTemplate" imagePosition="overlaps" alignment="center" continuous="YES" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xY8-dJ-EBd">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
@@ -964,6 +987,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="21" id="KDc-iT-a2m"/>
                                                         </constraints>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSLeftFacingTriangleTemplate" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BHC-lM-rkw">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
@@ -977,6 +1001,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="21" id="ub3-ed-5Le"/>
                                                         </constraints>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSRightFacingTriangleTemplate" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cNk-ld-nPM">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
@@ -985,8 +1010,9 @@
                                                             <action selector="increaseDayOffset:" target="4fd-vU-fyo" id="krq-hx-XAa"/>
                                                         </connections>
                                                     </button>
-                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="a1s-29-zha">
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a1s-29-zha">
                                                         <rect key="frame" x="143" y="8" width="44" height="17"/>
+                                                        <animations/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" alignment="right" title="Zoom:" id="skB-AC-Tgt">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -998,6 +1024,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="29" id="Kdq-oI-qn8"/>
                                                         </constraints>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="CalendarStrippedTemplate" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xja-ga-Tal">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
@@ -1026,6 +1053,7 @@
                                                     <constraint firstItem="mM5-Xf-Zdj" firstAttribute="top" secondItem="a1s-29-zha" secondAttribute="top" id="xIn-dT-QSr"/>
                                                     <constraint firstItem="5EH-Q1-kBy" firstAttribute="top" secondItem="zjC-5L-TvR" secondAttribute="top" id="yi5-Ov-8UV"/>
                                                 </constraints>
+                                                <animations/>
                                             </customView>
                                             <customView id="9K4-2D-JaF" customClass="WhiteView">
                                                 <rect key="frame" x="261" y="0.0" width="697" height="600"/>
@@ -1039,6 +1067,7 @@
                                                             <subviews>
                                                                 <customView horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kyo-sV-bp4" customClass="SCKWeekView">
                                                                     <rect key="frame" x="0.0" y="0.0" width="697" height="567"/>
+                                                                    <animations/>
                                                                     <connections>
                                                                         <outlet property="eventManager" destination="Alw-t4-dw3" id="B7x-yg-Bs5"/>
                                                                     </connections>
@@ -1050,19 +1079,24 @@
                                                                 <constraint firstAttribute="trailing" secondItem="kyo-sV-bp4" secondAttribute="trailing" id="kaj-O3-LY6"/>
                                                                 <constraint firstItem="kyo-sV-bp4" firstAttribute="top" secondItem="t4p-eu-byB" secondAttribute="top" id="wjN-zU-Reg"/>
                                                             </constraints>
+                                                            <animations/>
                                                             <color key="backgroundColor" name="controlDarkShadowColor" catalog="System" colorSpace="catalog"/>
                                                         </clipView>
+                                                        <animations/>
                                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="881-YZ-LgV">
                                                             <rect key="frame" x="1" y="80" width="166" height="15"/>
                                                             <autoresizingMask key="autoresizingMask"/>
+                                                            <animations/>
                                                         </scroller>
                                                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="dyt-5L-4Rq">
                                                             <rect key="frame" x="167" y="1" width="15" height="79"/>
                                                             <autoresizingMask key="autoresizingMask"/>
+                                                            <animations/>
                                                         </scroller>
                                                     </scrollView>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aem-fu-wMV">
                                                         <rect key="frame" x="639" y="6" width="21" height="19"/>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" continuous="YES" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="SOC-l5-wdu">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
@@ -1073,6 +1107,7 @@
                                                     </button>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EfJ-mS-AMK">
                                                         <rect key="frame" x="668" y="6" width="21" height="19"/>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSAddTemplate" imagePosition="overlaps" alignment="center" continuous="YES" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kTs-ZE-Oe2">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
@@ -1081,8 +1116,9 @@
                                                             <action selector="increaseZoomFactor:" target="kyo-sV-bp4" id="vYU-qI-9T6"/>
                                                         </connections>
                                                     </button>
-                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PYY-Ag-mid">
+                                                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PYY-Ag-mid">
                                                         <rect key="frame" x="36" y="6" width="76" height="19"/>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="recessed" title="This week" bezelStyle="recessed" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="usb-69-gTq">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
@@ -1096,6 +1132,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="21" id="TRq-SD-qV1"/>
                                                         </constraints>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSLeftFacingTriangleTemplate" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2HG-i1-Wfs">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
@@ -1104,19 +1141,21 @@
                                                             <action selector="decreaseWeekOffset:" target="kyo-sV-bp4" id="QBc-Wi-cmP"/>
                                                         </connections>
                                                     </button>
-                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Iga-HC-ztG">
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iga-HC-ztG">
                                                         <rect key="frame" x="589" y="8" width="44" height="17"/>
+                                                        <animations/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" alignment="right" title="Zoom:" id="FZX-mH-mDD">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
-                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YoQ-LS-tU3">
+                                                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YoQ-LS-tU3">
                                                         <rect key="frame" x="120" y="6" width="21" height="19"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="21" id="Mwk-rn-fBD"/>
                                                         </constraints>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSRightFacingTriangleTemplate" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Spc-Im-RAz">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
@@ -1125,8 +1164,9 @@
                                                             <action selector="increaseWeekOffset:" target="kyo-sV-bp4" id="yns-o4-52O"/>
                                                         </connections>
                                                     </button>
-                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="Otv-BQ-6bM">
+                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Otv-BQ-6bM">
                                                         <rect key="frame" x="147" y="8" width="84" height="18"/>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="check" title="Saturdays" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="LKd-dc-UwM">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -1135,8 +1175,9 @@
                                                             <binding destination="Voe-Tx-rLC" name="value" keyPath="showsSaturdays" id="2Pd-fj-wAP"/>
                                                         </connections>
                                                     </button>
-                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="A7h-cD-wfv">
+                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A7h-cD-wfv">
                                                         <rect key="frame" x="235" y="8" width="76" height="18"/>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="check" title="Sundays" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="90k-2G-lZw">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -1146,11 +1187,12 @@
                                                             <binding destination="Voe-Tx-rLC" name="value" keyPath="showsSundays" id="dXR-XQ-HrG"/>
                                                         </connections>
                                                     </button>
-                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DME-je-GlK">
+                                                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DME-je-GlK">
                                                         <rect key="frame" x="555" y="6" width="28" height="19"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="28" id="vAU-VX-zhx"/>
                                                         </constraints>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="MultipleSettingsTemplate" imagePosition="overlaps" alignment="center" continuous="YES" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gxc-Rd-FyH">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
@@ -1186,8 +1228,10 @@
                                                     <constraint firstItem="YoQ-LS-tU3" firstAttribute="leading" secondItem="PYY-Ag-mid" secondAttribute="trailing" constant="8" symbolic="YES" id="zDo-P2-DPH"/>
                                                     <constraint firstItem="Otv-BQ-6bM" firstAttribute="baseline" secondItem="YoQ-LS-tU3" secondAttribute="baseline" id="zwl-fQ-MWo"/>
                                                 </constraints>
+                                                <animations/>
                                             </customView>
                                         </subviews>
+                                        <animations/>
                                         <holdingPriorities>
                                             <real value="251"/>
                                             <real value="250"/>
@@ -1200,8 +1244,10 @@
                                     <constraint firstItem="i6y-JH-SWn" firstAttribute="leading" secondItem="9so-2A-iwk" secondAttribute="leading" id="fMW-UV-OKe"/>
                                     <constraint firstItem="i6y-JH-SWn" firstAttribute="top" secondItem="9so-2A-iwk" secondAttribute="top" id="tgh-c7-1Ar"/>
                                 </constraints>
+                                <animations/>
                             </customView>
                         </subviews>
+                        <animations/>
                         <holdingPriorities>
                             <real value="252"/>
                             <real value="251"/>
@@ -1214,6 +1260,7 @@
                     <constraint firstAttribute="trailing" secondItem="lgB-Sp-Or5" secondAttribute="trailing" id="wt7-xT-uYP"/>
                     <constraint firstItem="lgB-Sp-Or5" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="xQG-3h-Gek"/>
                 </constraints>
+                <animations/>
             </view>
             <point key="canvasLocation" x="626" y="384"/>
         </window>
@@ -1251,8 +1298,9 @@
             <rect key="frame" x="0.0" y="0.0" width="234" height="256"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <slider verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mcu-gG-pXq">
-                    <rect key="frame" x="18" y="141" width="198" height="27"/>
+                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mcu-gG-pXq">
+                    <rect key="frame" x="18" y="141" width="198" height="25"/>
+                    <animations/>
                     <sliderCell key="cell" state="on" alignment="left" maxValue="12" doubleValue="12" tickMarkPosition="below" numberOfTickMarks="12" allowsTickMarkValuesOnly="YES" sliderType="linear" id="CPe-a9-Tls"/>
                     <connections>
                         <binding destination="Voe-Tx-rLC" name="value" keyPath="self.dayStartHour" id="s7L-9w-9Er"/>
@@ -1260,14 +1308,16 @@
                 </slider>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3jE-dx-Bha">
                     <rect key="frame" x="49" y="172" width="136" height="17"/>
+                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Day start hour" drawsBackground="YES" id="mRh-Wl-tzQ">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3V0-DW-pXi">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3V0-DW-pXi">
                     <rect key="frame" x="73" y="197" width="88" height="39"/>
+                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="10:00" drawsBackground="YES" id="U80-GC-G3B">
                         <font key="font" metaFont="system" size="32"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1281,8 +1331,9 @@
                         </binding>
                     </connections>
                 </textField>
-                <slider verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2SG-jf-K6P">
-                    <rect key="frame" x="18" y="19" width="198" height="27"/>
+                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2SG-jf-K6P">
+                    <rect key="frame" x="18" y="19" width="198" height="25"/>
+                    <animations/>
                     <sliderCell key="cell" state="on" alignment="left" minValue="18" maxValue="23" doubleValue="18" tickMarkPosition="below" numberOfTickMarks="6" allowsTickMarkValuesOnly="YES" sliderType="linear" id="rog-EP-vPe"/>
                     <connections>
                         <binding destination="Voe-Tx-rLC" name="value" keyPath="self.dayEndHour" id="zjQ-pL-RZk"/>
@@ -1290,6 +1341,7 @@
                 </slider>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y0I-Jr-iUZ">
                     <rect key="frame" x="58" y="50" width="118" height="17"/>
+                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Day end hour" drawsBackground="YES" id="ZhZ-Ht-pae">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1298,6 +1350,7 @@
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xIc-ed-zxG">
                     <rect key="frame" x="73" y="77" width="88" height="39"/>
+                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="23:00" drawsBackground="YES" id="7TJ-5m-uvC">
                         <font key="font" metaFont="system" size="32"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1328,6 +1381,7 @@
                 <constraint firstAttribute="trailing" secondItem="mcu-gG-pXq" secondAttribute="trailing" constant="20" symbolic="YES" id="nWK-Nl-RQb"/>
                 <constraint firstItem="mcu-gG-pXq" firstAttribute="trailing" secondItem="2SG-jf-K6P" secondAttribute="trailing" id="pF4-VK-nCT"/>
             </constraints>
+            <animations/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="dividerPosition">
                     <real key="value" value="128"/>
@@ -1351,10 +1405,11 @@
             <subviews>
                 <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="phQ-99-kLf">
                     <rect key="frame" x="20" y="46" width="139" height="148"/>
+                    <animations/>
                     <datePickerCell key="cell" alignment="left" drawsBackground="NO" datePickerStyle="clockAndCalendar" id="1fV-O5-O4m">
                         <font key="font" metaFont="system"/>
                         <calendarDate key="date" timeIntervalSinceReferenceDate="-595929600" calendarFormat="%Y-%m-%d %H:%M:%S %z">
-                            <!--1982-02-12 16:00:00 +0000-->
+                            <!--1982-02-12 08:00:00 -0800-->
                             <timeZone key="timeZone" name="US/Pacific"/>
                         </calendarDate>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1364,8 +1419,9 @@
                         <binding destination="Voe-Tx-rLC" name="value" keyPath="self.calendarViewSelection" id="gBR-Ac-UET"/>
                     </connections>
                 </datePicker>
-                <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="40Q-iu-L6q">
+                <button focusRingType="none" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40Q-iu-L6q">
                     <rect key="frame" x="64" y="9" width="50" height="19"/>
+                    <animations/>
                     <buttonCell key="cell" type="recessed" title="Today" bezelStyle="recessed" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="2gq-w4-RDm">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="systemBold" size="12"/>
@@ -1381,6 +1437,7 @@
                 <constraint firstItem="phQ-99-kLf" firstAttribute="leading" secondItem="vI9-Wu-CcM" secondAttribute="leading" constant="20" symbolic="YES" id="esM-80-blu"/>
                 <constraint firstItem="phQ-99-kLf" firstAttribute="top" secondItem="vI9-Wu-CcM" secondAttribute="top" constant="20" symbolic="YES" id="nRj-Of-CkJ"/>
             </constraints>
+            <animations/>
             <point key="canvasLocation" x="387.5" y="926"/>
         </customView>
     </objects>

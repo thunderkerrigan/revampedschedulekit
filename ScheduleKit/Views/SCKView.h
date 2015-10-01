@@ -41,6 +41,7 @@
   * - Common event view (un)locking and relayout workflow.
   */
 @interface SCKView : NSView {
+    IBOutlet NSView *view;
     double _absoluteStartTimeRef; /**< Absolute value for @c startDate */
     double _absoluteEndTimeRef; /**< Absolute value for @c endDate */
     NSMutableArray * _eventViews; /**< SCKEventView subviews */

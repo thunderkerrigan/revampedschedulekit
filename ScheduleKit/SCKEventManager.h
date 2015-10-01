@@ -46,5 +46,5 @@
 @property (nonatomic, assign) BOOL loadsEventsAsynchronously;
 @property (nonatomic, weak) id <SCKEventManagerDataSource> dataSource;
 @property (nonatomic, weak) id <SCKEventManagerDelegate> delegate;
-@property (nonatomic, weak) SCKView * view;
+@property (nonatomic, weak) IBOutlet SCKView * view;
 @end
