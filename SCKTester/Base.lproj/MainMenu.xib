@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15B22c" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9060" systemVersion="15C47a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -682,10 +682,10 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <rect key="contentRect" x="93" y="178" width="1160" height="600"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="1160" height="600"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <splitView dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lgB-Sp-Or5">
                         <rect key="frame" x="0.0" y="0.0" width="1160" height="600"/>
@@ -884,13 +884,14 @@
                                             <constraint firstAttribute="width" constant="96" id="6f2-g5-aZl"/>
                                         </constraints>
                                         <animations/>
-                                        <popUpButtonCell key="cell" type="recessed" title="By type" bezelStyle="recessed" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="gDN-sp-oxy" id="Af3-Vs-8Xr">
+                                        <popUpButtonCell key="cell" type="recessed" title="By event" bezelStyle="recessed" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="1en-0h-r5e" id="Af3-Vs-8Xr">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="systemBold" size="12"/>
                                             <menu key="menu" id="8KX-po-X60">
                                                 <items>
-                                                    <menuItem title="By type" state="on" id="gDN-sp-oxy"/>
+                                                    <menuItem title="By type" id="gDN-sp-oxy"/>
                                                     <menuItem title="By owner" id="c1a-fJ-xjK"/>
+                                                    <menuItem title="By event" state="on" id="1en-0h-r5e" userLabel="By event"/>
                                                 </items>
                                             </menu>
                                         </popUpButtonCell>
@@ -928,11 +929,11 @@
                                                     <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="5EH-Q1-kBy">
                                                         <rect key="frame" x="0.0" y="33" width="251" height="567"/>
                                                         <clipView key="contentView" id="ilT-9H-Td3">
-                                                            <rect key="frame" x="1" y="1" width="166" height="79"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="251" height="567"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4fd-vU-fyo" customClass="SCKDayView">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="251" height="567"/>
+                                                                    <rect key="frame" x="0.0" y="488" width="567" height="251"/>
                                                                     <animations/>
                                                                     <connections>
                                                                         <outlet property="eventManager" destination="fy9-p5-faF" id="A3L-si-iHP"/>
@@ -941,8 +942,8 @@
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstAttribute="bottom" secondItem="4fd-vU-fyo" secondAttribute="bottom" priority="250" id="AKT-xT-wed"/>
-                                                                <constraint firstAttribute="trailing" secondItem="4fd-vU-fyo" secondAttribute="trailing" id="TLF-mm-Txv"/>
-                                                                <constraint firstItem="4fd-vU-fyo" firstAttribute="top" secondItem="ilT-9H-Td3" secondAttribute="top" id="Tyz-vx-WZb"/>
+                                                                <constraint firstAttribute="trailing" secondItem="4fd-vU-fyo" secondAttribute="trailing" constant="-316" id="TLF-mm-Txv"/>
+                                                                <constraint firstItem="4fd-vU-fyo" firstAttribute="top" secondItem="ilT-9H-Td3" secondAttribute="top" constant="316" id="Tyz-vx-WZb"/>
                                                                 <constraint firstItem="4fd-vU-fyo" firstAttribute="leading" secondItem="ilT-9H-Td3" secondAttribute="leading" id="rdq-43-VcN"/>
                                                             </constraints>
                                                             <animations/>
@@ -955,7 +956,7 @@
                                                             <animations/>
                                                         </scroller>
                                                         <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="ebT-QE-XTx">
-                                                            <rect key="frame" x="235" y="0.0" width="16" height="567"/>
+                                                            <rect key="frame" x="236" y="0.0" width="15" height="567"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <animations/>
                                                         </scroller>

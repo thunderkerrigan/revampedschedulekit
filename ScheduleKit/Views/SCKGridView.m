@@ -250,18 +250,18 @@ static NSDictionary * __subHourLabelAttrs = nil;
     }
 }
 
-- (void)drawCurrentTimeLine {
-    NSRect canvas = [self contentRect];
-    NSDateComponents *components = [_calendar components:NSCalendarUnitHour|NSCalendarUnitMinute
-                                                fromDate:[NSDate date]];
-    double mOffset = (double)_hourCount * 60.0;
-    double cOffset = (double)(components.hour-_firstHour) * 60.0 + (double)components.minute;
-    CGFloat yOrigin = NSMinY(canvas) + NSHeight(canvas) * (cOffset / mOffset);
-    [[NSColor redColor] setFill];
-    NSRectFill(NSMakeRect(NSMinX(canvas), yOrigin-0.25, NSWidth(canvas), 0.5));
-    NSBezierPath *circle = [NSBezierPath bezierPathWithOvalInRect:NSMakeRect(NSMinX(canvas)-2.0, yOrigin-2.0, 4.0, 4.0)];
-    [circle fill];
-}
+//- (void)drawCurrentTimeLine {
+//    NSRect canvas = [self contentRect];
+//    NSDateComponents *components = [_calendar components:NSCalendarUnitHour|NSCalendarUnitMinute
+//                                                fromDate:[NSDate date]];
+//    double mOffset = (double)_hourCount * 60.0;
+//    double cOffset = (double)(components.hour-_firstHour) * 60.0 + (double)components.minute;
+//    CGFloat yOrigin = NSMinY(canvas) + NSHeight(canvas) * (cOffset / mOffset);
+//    [[NSColor redColor] setFill];
+//    NSRectFill(NSMakeRect(NSMinX(canvas), yOrigin-0.25, NSWidth(canvas), 0.5));
+//    NSBezierPath *circle = [NSBezierPath bezierPathWithOvalInRect:NSMakeRect(NSMinX(canvas)-2.0, yOrigin-2.0, 4.0, 4.0)];
+//    [circle fill];
+//}
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect]; // Fills background
@@ -269,7 +269,7 @@ static NSDictionary * __subHourLabelAttrs = nil;
         [self drawUnavailableTimeRanges];
         [self drawDayLabelRect];
         [self drawHourDelimiters];
-        [self drawCurrentTimeLine];
+//        [self drawCurrentTimeLine];
         if (_eventViewBeingDragged) {
             [self drawDraggingGuides];
         } else {

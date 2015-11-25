@@ -103,6 +103,7 @@
 @property (assign) SCKRelativeTimeLocation cachedRelativeEnd;
 @property (assign) SCKRelativeTimeLength cachedRelativeLength;
 @property (strong, nullable) NSColor *cachedUserLabelColor;
+@property (strong, nullable) NSColor *cachedBackgroundEventColor;
 @property (strong, nullable) NSString *cachedTitle;
 @property (strong, nullable) NSDate *cachedScheduleDate;
 @property (assign) NSInteger cachedDuration;

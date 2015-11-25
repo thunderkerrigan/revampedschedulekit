@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C17BB0A1BBD900000E79E2D /* SCKTheaterDayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C17BB081BBD900000E79E2D /* SCKTheaterDayView.h */; };
+		7C17BB0B1BBD900000E79E2D /* SCKTheaterDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C17BB091BBD900000E79E2D /* SCKTheaterDayView.m */; };
 		990206FE1A50590D00912DF5 /* SCKEventManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 990206FC1A50590D00912DF5 /* SCKEventManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		990206FF1A50590D00912DF5 /* SCKEventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 990206FD1A50590D00912DF5 /* SCKEventManager.m */; };
 		990207021A535D0400912DF5 /* SCKGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = 990207001A535D0400912DF5 /* SCKGridView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -92,6 +94,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7C17BB081BBD900000E79E2D /* SCKTheaterDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCKTheaterDayView.h; sourceTree = "<group>"; };
+		7C17BB091BBD900000E79E2D /* SCKTheaterDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCKTheaterDayView.m; sourceTree = "<group>"; };
 		990206FC1A50590D00912DF5 /* SCKEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCKEventManager.h; path = ScheduleKit/SCKEventManager.h; sourceTree = SOURCE_ROOT; };
 		990206FD1A50590D00912DF5 /* SCKEventManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCKEventManager.m; path = ScheduleKit/SCKEventManager.m; sourceTree = SOURCE_ROOT; };
 		990207001A535D0400912DF5 /* SCKGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCKGridView.h; sourceTree = "<group>"; };
@@ -250,6 +254,8 @@
 				9902070D1A542DA300912DF5 /* SCKDayView.m */,
 				990207101A5457ED00912DF5 /* SCKWeekView.h */,
 				990207111A5457ED00912DF5 /* SCKWeekView.m */,
+				7C17BB081BBD900000E79E2D /* SCKTheaterDayView.h */,
+				7C17BB091BBD900000E79E2D /* SCKTheaterDayView.m */,
 			);
 			name = "Schedule views";
 			sourceTree = "<group>";
@@ -360,6 +366,7 @@
 				9902074C1A55E14F00912DF5 /* SCKEvent.h in Headers */,
 				990207061A53692800912DF5 /* SCKUnavailableTimeRange.h in Headers */,
 				990207021A535D0400912DF5 /* SCKGridView.h in Headers */,
+				7C17BB0A1BBD900000E79E2D /* SCKTheaterDayView.h in Headers */,
 				99E7D0CB1A4B3B9B00713F18 /* SCKEventView.h in Headers */,
 				990206FE1A50590D00912DF5 /* SCKEventManager.h in Headers */,
 				99E7D0D01A4B3C3500713F18 /* SCKEventHolder.h in Headers */,
@@ -562,6 +569,7 @@
 				9902070B1A5417B100912DF5 /* SCKDayPoint.m in Sources */,
 				99E7D0CC1A4B3B9B00713F18 /* SCKEventView.m in Sources */,
 				9902070F1A542DA300912DF5 /* SCKDayView.m in Sources */,
+				7C17BB0B1BBD900000E79E2D /* SCKTheaterDayView.m in Sources */,
 				990207071A53692800912DF5 /* SCKUnavailableTimeRange.m in Sources */,
 				99E7D0C11A4AF63F00713F18 /* SCKView.m in Sources */,
 				990207031A535D0400912DF5 /* SCKGridView.m in Sources */,

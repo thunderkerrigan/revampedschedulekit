@@ -82,6 +82,19 @@ typedef NS_ENUM(NSUInteger, SCKEventType) {
 - (id)patient;
 
 /**
+ *  This method or property should return a color that will be used to draw SCKEventView's
+ *  background.
+ *  @return The requested NSColor object.
+ */
+- (NSColor*)backgroundColor;
+
+/**
+ *  Called to set the event's backgroundColor.
+ *  @param color The new event color.
+ */
+- (void)setBackgroundColor:(NSColor*)color;
+
+/**
  *  This method or property should return the string that will be drawn inside of the
  *  SCKEventView's frame, which allows the user to better identify each event.
  *  @return The requested NSString object.
@@ -111,5 +124,30 @@ typedef NS_ENUM(NSUInteger, SCKEventType) {
  *  @param scheduledDate The new event's start date.
  */
 - (void)setScheduledDate:(NSDate*)scheduledDate;
+
+@end
+
+@protocol SCKRoom <NSObject>
+
+/**
+ *  This method or property should return the string that will be drawn inside of the
+ *  SCKRoomView's frame, which allows the user to better identify each room.
+ *  @return The requested NSString object.
+ */
+- (NSString*)title;
+
+/**
+ *  This method or property should return a color that will be used to draw SCKRoomView
+ *  @return The requested NSColor object.
+ */
+- (NSColor*)labelColor;
+/**
+ *  This method or property should return an array that will be used to draw SCKRoomView's
+ *  frame, which allow the user to see the room capability
+ *
+ *  @return an array containing the room's capabilities
+ */
+- (NSArray *)capabilities;
+
 
 @end

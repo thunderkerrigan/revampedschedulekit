@@ -61,6 +61,7 @@
     if (self) {
         _cachedUser = [e user];
         _cachedUserLabelColor = [[_cachedUser labelColor] copy];
+        _cachedBackgroundEventColor = [[e backgroundColor] copy];
         _cachedTitle = [[e title] copy];
         _cachedScheduleDate = [[e scheduledDate] copy];
         _cachedDuration = [[e duration] integerValue];

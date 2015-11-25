@@ -43,7 +43,8 @@ typedef NS_ENUM(NSUInteger, SCKEventColorMode){
     SCKEventColorModeByEventType  = 0,
     /** The 'by event owner' mode sets event views' background color according to the
      *  label color of their event holder's user. */
-    SCKEventColorModeByEventOwner = 1
+    SCKEventColorModeByEventOwner = 1,
+    SCKEventColorModeByEvent = 2
 };
 
 typedef NS_ENUM(NSInteger, SCKDraggingStatus) {

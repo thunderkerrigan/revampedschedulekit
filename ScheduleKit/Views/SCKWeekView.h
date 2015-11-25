@@ -30,4 +30,5 @@
 - (IBAction)resetWeekOffset:(id)sender;
 
 @property (nonatomic, weak) id <SCKWeekViewDelegate> delegate;
+
 @end

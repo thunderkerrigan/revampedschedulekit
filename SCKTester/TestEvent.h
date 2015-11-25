@@ -20,4 +20,5 @@
 @property (copy)   NSString * title;
 @property (strong) NSNumber * duration;
 @property (strong) NSDate * scheduledDate;
+@property (strong) NSColor * backgroundColor;
 @end

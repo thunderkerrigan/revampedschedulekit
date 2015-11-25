@@ -48,6 +48,7 @@
     _testEvent.patient = nil;
     _testEvent.title = @"Test";
     _testEvent.duration = @60;
+    _testEvent.backgroundColor = [NSColor redColor];
     _testEvent.scheduledDate = [NSDate dateWithTimeIntervalSinceReferenceDate:5400];
     _rootView = [[SCKView alloc] initWithFrame:NSMakeRect(0.0, 0.0, 800.0, 600.0)];
     _rootView.startDate = [NSDate dateWithTimeIntervalSinceReferenceDate:0];

@@ -93,6 +93,12 @@ static NSColor *__specialEventStrokeColor;
             SCKEventType type = [_eventHolder.representedObject eventType]; // Does not query db
             fillColor = [self.class colorForEventType:type];
             strokeColor = [self.class strokeColorForEventType:type];
+        }
+        else if (view.colorMode == SCKEventColorModeByEvent)
+        {
+            fillColor = _eventHolder.cachedBackgroundEventColor?:[NSColor colorWithCalibratedRed:0.5 green:0.5 blue:0.5 alpha:1.0];
+            double red = fillColor.redComponent, green = fillColor.greenComponent, blue = fillColor.blueComponent;
+            strokeColor = [NSColor colorWithCalibratedRed:red-0.1 green:green-0.1 blue:blue-0.1 alpha:1.0];
         } else {
             fillColor = _eventHolder.cachedUserLabelColor?:[NSColor colorWithCalibratedRed:0.5 green:0.5 blue:0.5 alpha:1.0];
             double red = fillColor.redComponent, green = fillColor.greenComponent, blue = fillColor.blueComponent;

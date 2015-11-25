@@ -18,6 +18,7 @@
         _patient = patient;
         _title = title;
         _duration = @(duration);
+        _backgroundColor = [NSColor redColor];
         NSTimeInterval t = [date timeIntervalSinceReferenceDate];
         while ((NSUInteger)t % 60 >0) {
             t++;
