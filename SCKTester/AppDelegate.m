@@ -300,4 +300,28 @@
     return c;
 }
 
+# pragma mark - SCKTheaterDayViewDelegate
+
+- (NSInteger)dayStartHourForTheaterDayView:(SCKTheaterDayView *)tView
+{
+    return _dayStartHour;
+}
+
+- (NSInteger)dayEndHourForTheaterDayView:(SCKTheaterDayView *)tView
+{
+    return _dayEndHour;
+}
+
+- (NSInteger)dayCountForTheaterDayView:(SCKTheaterDayView *)tView
+{
+    NSInteger c = 5;
+    if (_showsSaturdays) {
+        c++;
+        if (_showsSundays) {
+            c++;
+        }
+    }
+    return c;
+}
+
 @end

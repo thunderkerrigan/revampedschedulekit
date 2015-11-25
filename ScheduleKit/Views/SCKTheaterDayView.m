@@ -211,11 +211,11 @@ static NSDictionary * __subHourLabelAttrs = nil;
     NSRectFill(dirtyRect);
     //todo
     // draw day view --> convert for roomview
-//    [self drawRoomLabelRect];
     if ((_absoluteStartTimeRef < _absoluteEndTimeRef) &&
         (_hourCount > 0))
     {
         [self drawUnavailableTimeRanges];
+        [self drawRoomLabelRect];
         [self drawHourDelimiters];
         if (_eventViewBeingDragged)
         {

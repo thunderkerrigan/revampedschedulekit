@@ -9,7 +9,7 @@
 @import Cocoa;
 @import ScheduleKit;
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource, SCKEventManagerDataSource, SCKEventManagerDelegate, SCKWeekViewDelegate> {
+@interface AppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource, SCKEventManagerDataSource, SCKEventManagerDelegate, SCKWeekViewDelegate, SCKTheaterDayViewDelegate> {
     NSArray * __users;
     BOOL _reloadingDayData;
     BOOL _reloadingWeekData;

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7C17BB0A1BBD900000E79E2D /* SCKTheaterDayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C17BB081BBD900000E79E2D /* SCKTheaterDayView.h */; };
+		7C17BB0A1BBD900000E79E2D /* SCKTheaterDayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C17BB081BBD900000E79E2D /* SCKTheaterDayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7C17BB0B1BBD900000E79E2D /* SCKTheaterDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C17BB091BBD900000E79E2D /* SCKTheaterDayView.m */; };
 		990206FE1A50590D00912DF5 /* SCKEventManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 990206FC1A50590D00912DF5 /* SCKEventManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		990206FF1A50590D00912DF5 /* SCKEventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 990206FD1A50590D00912DF5 /* SCKEventManager.m */; };
@@ -366,12 +366,12 @@
 				9902074C1A55E14F00912DF5 /* SCKEvent.h in Headers */,
 				990207061A53692800912DF5 /* SCKUnavailableTimeRange.h in Headers */,
 				990207021A535D0400912DF5 /* SCKGridView.h in Headers */,
-				7C17BB0A1BBD900000E79E2D /* SCKTheaterDayView.h in Headers */,
 				99E7D0CB1A4B3B9B00713F18 /* SCKEventView.h in Headers */,
 				990206FE1A50590D00912DF5 /* SCKEventManager.h in Headers */,
 				99E7D0D01A4B3C3500713F18 /* SCKEventHolder.h in Headers */,
 				9902071D1A55722B00912DF5 /* SCKTextField.h in Headers */,
 				9AA8B8F81B58385600A96C1C /* SCKEventRequest.h in Headers */,
+				7C17BB0A1BBD900000E79E2D /* SCKTheaterDayView.h in Headers */,
 				99E7D0C01A4AF63F00713F18 /* SCKView.h in Headers */,
 				99E7D0A71A4AF3B500713F18 /* ScheduleKit.h in Headers */,
 				99A3740B1A7AF41D00F0E2BB /* SCKViewPrivate.h in Headers */,
