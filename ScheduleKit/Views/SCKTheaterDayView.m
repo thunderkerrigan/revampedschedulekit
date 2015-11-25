@@ -255,7 +255,7 @@ static NSDictionary * __subHourLabelAttrs = nil;
                                          kDayLabelHeight/2.0-roomLabelSize.height/2.0,
                                          dayWidth,
                                          roomLabelSize.height);
-        if ((d == 0) || ([[roomLabel componentsSeparatedByString:@" "][1] intValue] == 1))
+        if (d == 0)
         {
             roomLabelRect.origin.y -= 8.0;
             NSString *capabilitiesLabel = @"capability placeholder";
