@@ -13,8 +13,31 @@
 #import "SCKTheaterDayView.h"
 #import "SCKViewPrivate.h"
 
+#define kHourLabelWidth 56.0
+#define kDayLabelHeight 36.0
+#define kMaxHourHeight 300.0
 
 @implementation SCKTheaterDayView
+
+static NSDictionary * __dayLabelAttrs = nil;
+static NSDictionary * __monthLabelAttrs = nil;
+static NSDictionary * __hourLabelAttrs = nil;
+static NSDictionary * __subHourLabelAttrs = nil;
+
++ (void)initialize {
+    if (self == [SCKGridView self]) {
+        NSMutableParagraphStyle *cStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        NSMutableParagraphStyle *rStyle = [cStyle mutableCopy];
+        cStyle.alignment = NSCenterTextAlignment;
+        rStyle.alignment = NSRightTextAlignment;
+        __hourLabelAttrs = @{NSParagraphStyleAttributeName:  cStyle,
+                             NSForegroundColorAttributeName: [NSColor darkGrayColor],
+                             NSFontAttributeName: [NSFont systemFontOfSize:11.0]};
+        __subHourLabelAttrs = @{NSParagraphStyleAttributeName: rStyle,
+                                NSForegroundColorAttributeName: [NSColor lightGrayColor],
+                                NSFontAttributeName: [NSFont systemFontOfSize:10.0]};
+    }
+}
 
 - (void)customInit
 {
@@ -173,6 +196,181 @@
     else
     {
         return SCKRelativeTimeLocationNotFound;
+    }
+}
+
+/**
+ *  overridden method 
+ *  this view is not drawed on the same pattern as day and week presentation
+ *
+ *  @param dirtyRect rect to draw in
+ */
+- (void)drawRect:(NSRect)dirtyRect {
+//    [super drawRect:dirtyRect]; // Fills background
+    [[NSColor whiteColor] setFill];
+    NSRectFill(dirtyRect);
+    //todo
+    // draw day view --> convert for roomview
+//    [self drawRoomLabelRect];
+    if ((_absoluteStartTimeRef < _absoluteEndTimeRef) &&
+        (_hourCount > 0))
+    {
+        [self drawUnavailableTimeRanges];
+        [self drawHourDelimiters];
+        if (_eventViewBeingDragged)
+        {
+            [self drawDraggingGuides];
+        }
+        else
+        {
+            [self drawHourLabels];
+        }
+    } 
+}
+
+- (void)drawRoomLabelRect
+{
+    //private
+    NSMutableParagraphStyle *cStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    cStyle.alignment = NSCenterTextAlignment;
+    __dayLabelAttrs = @{NSParagraphStyleAttributeName:  cStyle,
+                        NSForegroundColorAttributeName: [NSColor darkGrayColor],
+                        NSFontAttributeName: [NSFont systemFontOfSize:14.0]};
+    __monthLabelAttrs = @{NSParagraphStyleAttributeName:  cStyle,
+                          NSForegroundColorAttributeName: [NSColor lightGrayColor],
+                          NSFontAttributeName: [NSFont systemFontOfSize:12.0]};
+    NSRect RoomLabelingRect = NSMakeRect(kHourLabelWidth,
+                                        self.bounds.origin.y,
+                                        self.frame.size.width - kHourLabelWidth,
+                                        kDayLabelHeight);
+    [[NSColor colorWithCalibratedWhite:0.95 alpha:1.0] set];
+    NSRectFill(RoomLabelingRect);
+    CGFloat dayWidth = (NSWidth(self.frame) - kHourLabelWidth) / (CGFloat)_dayCount;
+    for (NSInteger d = 0; d < _dayCount; d++)
+    {
+//        NSString *roomLabel = [[_dayLabelDateFormatter stringFromDate:dayDate] uppercaseString];
+        NSString *roomLabel = @"PLACEHOLDER";
+        NSSize roomLabelSize = [roomLabel sizeWithAttributes:__dayLabelAttrs];
+        NSRect roomLabelRect = NSMakeRect(NSMinX(RoomLabelingRect)+dayWidth*(CGFloat)d,
+                                         kDayLabelHeight/2.0-roomLabelSize.height/2.0,
+                                         dayWidth,
+                                         roomLabelSize.height);
+        if ((d == 0) || ([[roomLabel componentsSeparatedByString:@" "][1] intValue] == 1))
+        {
+            roomLabelRect.origin.y -= 8.0;
+            NSString *capabilitiesLabel = @"capability placeholder";
+            NSSize capabilitiesLabelSize = [capabilitiesLabel sizeWithAttributes:__monthLabelAttrs];
+            NSRect capabilitiesLabelRect = NSMakeRect(roomLabelRect.origin.x,
+                                               kDayLabelHeight/2.0-roomLabelSize.height/2.0 + 7.0,
+                                               roomLabelRect.size.width,
+                                               capabilitiesLabelSize.height);
+            [capabilitiesLabel drawInRect:capabilitiesLabelRect withAttributes:__monthLabelAttrs];
+        }
+        [roomLabel drawInRect:roomLabelRect withAttributes:__dayLabelAttrs];
+        [[NSColor colorWithCalibratedWhite:0.85 alpha:1.0] set];
+        NSRectFill(NSMakeRect(NSMinX(roomLabelRect)-0.5, 0.0, 1.0, NSHeight(self.frame)));
+    }
+    NSRectFill(NSMakeRect(kHourLabelWidth-8.0, kDayLabelHeight-0.5, self.frame.size.width, 1.0));
+}
+
+- (void)drawHourDelimiters { //Private
+    NSRect canvas = [self contentRect];
+    [[NSColor colorWithCalibratedWhite:0.95 alpha:1.0] set];
+    for (int h = 0; h < _hourCount; h++) {
+        NSRect r = NSMakeRect(canvas.origin.x-8.0, canvas.origin.y + self.hourHeight*(CGFloat)h - 0.4, NSWidth(canvas) + 8.0, 0.8);
+        NSRectFill(r);
+    }
+}
+
+- (void)drawHourLabels {
+    NSRect canvas = [self contentRect];
+    for (int h = 0; h < _hourCount; h++) {
+        NSRect r = NSMakeRect(NSMinX(canvas)-8.0, NSMinY(canvas) + self.hourHeight*(CGFloat)h-0.4, NSWidth(canvas)+8.0, 0.8);
+        NSString *hourLabel = [NSString stringWithFormat:@"%ld:00",_firstHour+h]; //"\(firstHour + h):00"
+        CGFloat hourLabelHeight = [hourLabel sizeWithAttributes:__hourLabelAttrs].height;
+        NSRect hourLabelRect = NSMakeRect(0.0, NSMidY(r)-hourLabelHeight/2.0-0.5,kHourLabelWidth-12.0,hourLabelHeight);
+        [hourLabel drawInRect:hourLabelRect withAttributes:__hourLabelAttrs];
+        
+        // Draw half hours if space available
+        if (self.hourHeight > 40.0) {
+            NSString *midHourLabel = [NSString stringWithFormat:@"%ld:30   -",_firstHour+h];
+            CGFloat midHourLabelHeight = [midHourLabel sizeWithAttributes:__subHourLabelAttrs].height;
+            NSRect midHourLabelRect = NSMakeRect(0.0, NSMidY(r)+self.hourHeight/2.0-midHourLabelHeight/2.0-0.5, kHourLabelWidth, midHourLabelHeight);
+            [midHourLabel drawInRect:midHourLabelRect withAttributes:__subHourLabelAttrs];
+            
+            if (self.hourHeight > 120.0) { // Draw 10ths
+                for (int min = 10; min <= 50; min += 10) {
+                    NSString *minLabel = [NSString stringWithFormat:@"%ld:%d   -",_firstHour+h,min];
+                    CGFloat minLabelHeight = [minLabel sizeWithAttributes:__subHourLabelAttrs].height;
+                    NSRect minLabelRect = NSMakeRect(0.0, NSMidY(r)+self.hourHeight/60.0*(CGFloat)min-minLabelHeight/2.0-0.5, kHourLabelWidth, minLabelHeight);
+                    [minLabel drawInRect:minLabelRect withAttributes:__subHourLabelAttrs];
+                }
+            } else if (self.hourHeight > 80.0) { // Draw 15ths
+                for (int min = 15; min <= 45; min += 15) {
+                    NSString *minLabel = [NSString stringWithFormat:@"%ld:%d   -",_firstHour+h,min];
+                    CGFloat minLabelHeight = [minLabel sizeWithAttributes:__subHourLabelAttrs].height;
+                    NSRect minLabelRect = NSMakeRect(0.0, NSMidY(r)+self.hourHeight/60.0*(CGFloat)min-minLabelHeight/2.0-0.5, kHourLabelWidth, minLabelHeight);
+                    [minLabel drawInRect:minLabelRect withAttributes:__subHourLabelAttrs];
+                }
+            }
+        }
+    }
+}
+
+- (void)drawUnavailableTimeRanges {
+    [[NSColor colorWithCalibratedWhite:0.975 alpha:1.0] set];
+    for (SCKUnavailableTimeRange *range in _unavailableTimeRanges) {
+        NSRectFill([self rectForUnavailableTimeRange:range]);
+    }
+}
+
+#define fill(x,y,w,h) NSRectFill(NSMakeRect(x,y,w,h))
+
+- (void)drawDraggingGuides {
+    SCKEventView *eV = _eventViewBeingDragged;
+    if (self.colorMode == SCKEventColorModeByEventType) {
+        [[SCKEventView strokeColorForEventType:[eV.eventHolder.representedObject eventType]] setFill];
+    } else if ([eV.eventHolder cachedUserLabelColor] != nil) {
+        [[eV.eventHolder cachedUserLabelColor] setFill];
+    } else {
+        [[NSColor darkGrayColor] setFill];
+    }
+    
+    NSRect canvasRect = [self contentRect];
+    NSRect eventRect = eV.frame;
+    
+    //Left guide
+    fill(NSMinX(canvasRect), NSMidY(eventRect)-1.0, NSMinX(eventRect)-NSMinX(canvasRect), 2.0);
+    //Right guide
+    fill(NSMaxX(eventRect), NSMidY(eventRect)-1.0, NSWidth(self.frame)-NSMaxX(eventRect), 2.0);
+    fill(NSMinX(canvasRect)-10.0, NSMinY(eventRect), 10.0, 2.0);
+    fill(NSMinX(canvasRect)-10.0, NSMaxY(eventRect)-2.0, 10.0, 2.0);
+    fill(NSMinX(canvasRect)-2, NSMinY(eventRect), 2.0, NSHeight(eventRect));
+    //Top guide
+    fill(NSMidX(eventRect)-1.0, NSMinY(canvasRect), 2.0, NSMinY(eventRect)-NSMinY(canvasRect));
+    //Bottom guide
+    fill(NSMidX(eventRect)-1.0, NSMaxY(eventRect), 2.0, NSHeight(self.frame)-NSMaxY(eventRect));
+    
+    CGFloat dayWidth = NSWidth(canvasRect) / (CGFloat)_dayCount;
+    SCKRelativeTimeLocation offsetPerDay = 1.0/(double)_dayCount;
+    SCKRelativeTimeLocation startOffset = [self relativeTimeLocationForPoint:NSMakePoint(NSMidX(eV.frame), NSMinY(eV.frame))];
+    if (startOffset != SCKRelativeTimeLocationNotFound) {
+        fill(NSMinX(canvasRect)+dayWidth*trunc(startOffset/offsetPerDay), NSMinY(canvasRect), dayWidth, 2.0);
+        
+        NSDate *startDate = [self calculateDateForRelativeTimeLocation:startOffset];
+        SCKDayPoint *sPoint = [[SCKDayPoint alloc] initWithDate:startDate];
+        SCKDayPoint *ePoint = [[SCKDayPoint alloc] initWithDate:[startDate dateByAddingTimeInterval:eV.eventHolder.cachedDuration*60.0]];
+        NSString *sHourLabel = [NSString stringWithFormat:@"%ld:%02ld",sPoint.hour,sPoint.minute];
+        NSString *eHourLabel = [NSString stringWithFormat:@"%ld:%02ld",ePoint.hour,ePoint.minute];
+        CGFloat height = [sHourLabel sizeWithAttributes:__hourLabelAttrs].height;
+        NSRect sHourLabelRect = NSMakeRect(0.0, NSMinY(eventRect)-height/2.0, NSMinX(canvasRect)-12, height);
+        NSRect eHourLabelRect = NSMakeRect(0.0, NSMaxY(eventRect)-height/2.0, NSMinX(canvasRect)-12, height);
+        [sHourLabel drawInRect:sHourLabelRect withAttributes:__hourLabelAttrs];
+        [eHourLabel drawInRect:eHourLabelRect withAttributes:__hourLabelAttrs];
+        
+        NSString *durationLabel = [NSString stringWithFormat:@"%ld min",eV.eventHolder.cachedDuration];
+        NSRect durationRect = NSMakeRect(0.0, NSMidY(eventRect)-height/2.0, NSMinX(canvasRect)-12, height);
+        [durationLabel drawInRect:durationRect withAttributes:__hourLabelAttrs];
     }
 }
 

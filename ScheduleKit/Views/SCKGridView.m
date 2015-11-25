@@ -250,6 +250,12 @@ static NSDictionary * __subHourLabelAttrs = nil;
     }
 }
 
+/**
+ * show on the grid the current position of time
+ * commented because it's not currently useful
+ * but might be used again in a near future
+ * also, "vanilla" method: /!\ don't delete /!\
+ */
 //- (void)drawCurrentTimeLine {
 //    NSRect canvas = [self contentRect];
 //    NSDateComponents *components = [_calendar components:NSCalendarUnitHour|NSCalendarUnitMinute

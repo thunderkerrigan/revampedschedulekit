@@ -1066,7 +1066,7 @@
                                                             <rect key="frame" x="1" y="1" width="166" height="79"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <customView horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kyo-sV-bp4" customClass="SCKWeekView">
+                                                                <customView horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kyo-sV-bp4" customClass="SCKTheaterDayView">
                                                                     <rect key="frame" x="0.0" y="0.0" width="697" height="567"/>
                                                                     <animations/>
                                                                     <connections>
@@ -1124,9 +1124,6 @@
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
                                                         </buttonCell>
-                                                        <connections>
-                                                            <action selector="resetWeekOffset:" target="kyo-sV-bp4" id="ybY-Lj-k3v"/>
-                                                        </connections>
                                                     </button>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cpb-C3-5D2">
                                                         <rect key="frame" x="7" y="6" width="21" height="19"/>
@@ -1138,9 +1135,6 @@
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
                                                         </buttonCell>
-                                                        <connections>
-                                                            <action selector="decreaseWeekOffset:" target="kyo-sV-bp4" id="QBc-Wi-cmP"/>
-                                                        </connections>
                                                     </button>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iga-HC-ztG">
                                                         <rect key="frame" x="589" y="8" width="44" height="17"/>
@@ -1161,9 +1155,6 @@
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="systemBold" size="12"/>
                                                         </buttonCell>
-                                                        <connections>
-                                                            <action selector="increaseWeekOffset:" target="kyo-sV-bp4" id="yns-o4-52O"/>
-                                                        </connections>
                                                     </button>
                                                     <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Otv-BQ-6bM">
                                                         <rect key="frame" x="147" y="8" width="84" height="18"/>
