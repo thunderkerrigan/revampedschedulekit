@@ -11,12 +11,17 @@
 
 @interface TestEvent : NSObject <SCKEvent>
 
-+ (NSArray*)sampleEvents:(NSArray*)userArray;
-- (instancetype)initWithType:(SCKEventType)type user:(id <SCKUser>)user patient:(id)patient title:(NSString*)title duration:(NSInteger)duration date:(NSDate*)date;
++ (NSArray*)sampleEvents:(NSArray*)userArray andRooms:(NSArray*)roomArray;
+- (instancetype)initWithType:(SCKEventType)type
+                        user:(id <SCKUser>)user
+                        room:(id <SCKRoom>)room
+                       title:(NSString*)title
+                    duration:(NSInteger)duration
+                        date:(NSDate*)date;
 
 @property (assign) SCKEventType eventType;
 @property (strong) id <SCKUser> user;
-@property (strong) id patient;
+@property (strong) id <SCKRoom> room;
 @property (copy)   NSString * title;
 @property (strong) NSNumber * duration;
 @property (strong) NSDate * scheduledDate;

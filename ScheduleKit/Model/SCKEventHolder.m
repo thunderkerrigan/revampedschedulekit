@@ -39,6 +39,7 @@
     
     BOOL            _observing; // Indicates wether we're observing changes in represented object or not.
     __weak id       _cachedUser; // A weak reference to @c representedObject's user (to safely parse labelColor changes)
+    __weak id       _cachedRoom; // A weak reference to @c representedObject's user (to safely parse labelColor changes)
     __weak id       _eventManager; // A convenience reference to the event manager.
     __weak SCKView* _rootView; // A convenience reference to owningView's superview.
     NSInteger       _lockBalance; // The number of times @c lock: has been called over @c unlock:
@@ -65,6 +66,7 @@
         _cachedTitle = [[e title] copy];
         _cachedScheduleDate = [[e scheduledDate] copy];
         _cachedDuration = [[e duration] integerValue];
+        _cachedRoom = [e room];
         _owningView = v;
         _rootView = (SCKView*)_owningView.superview;
         _eventManager = [_rootView eventManager];

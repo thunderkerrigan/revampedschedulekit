@@ -9,8 +9,9 @@
 @import Cocoa;
 @import ScheduleKit;
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource, SCKEventManagerDataSource, SCKEventManagerDelegate, SCKWeekViewDelegate, SCKTheaterDayViewDelegate> {
+@interface AppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource, SCKEventManagerDataSource, SCKEventManagerDelegate, SCKWeekViewDelegate, SCKTheaterDayViewDelegate, SCKTheaterDayViewDataSource> {
     NSArray * __users;
+    NSArray *__rooms;
     BOOL _reloadingDayData;
     BOOL _reloadingWeekData;
     SCKEventRequest *_asynchronousRequest;
@@ -35,6 +36,7 @@
 
 @property (readonly) id <SCKEvent> selectedEvent;
 @property (strong) NSMutableArray * users;
+@property (strong) NSMutableArray * rooms;
 @property (strong) NSMutableArray * eventArray;
 @property (nonatomic,assign) BOOL showsSaturdays;
 @property (nonatomic,assign) BOOL showsSundays;

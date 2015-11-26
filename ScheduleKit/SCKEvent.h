@@ -37,6 +37,38 @@ typedef NS_ENUM(NSUInteger, SCKEventType) {
     SCKEventTypeSpecial = NSUIntegerMax /**< A special event type for transitory events */
 };
 
+@protocol SCKRoom <NSObject>
+
+/**
+ *  This method or property should return the string that will be drawn inside of the
+ *  SCKRoomView's frame, which allows the user to better identify each room.
+ *  @return The requested NSString object.
+ */
+- (NSString*)title;
+
+/**
+ *  This method or property should return a color that will be used to draw SCKRoomView
+ *  @return The requested NSColor object.
+ */
+- (NSColor*)labelColor;
+/**
+ *  This method or property should return an array that will be used to draw SCKRoomView's
+ *  frame, which allow the user to see the room capability
+ *
+ *  @return an array containing the room's capabilities
+ */
+- (NSArray *)capabilities;
+
+/**
+ *  Returns the event's date and time.
+ *  @return A NSDate object representing the event's start date.
+ */
+- (NSString*)roomId;
+
+
+@end
+
+
 /**
  *  The SCKUser protocol declares the expected interface for SCKEvent's @c user
  *  property values.
@@ -73,6 +105,13 @@ typedef NS_ENUM(NSUInteger, SCKEventType) {
  *  @return The requested user object. It must conform to the @c SCKUser protocol.
  */
 - (id <SCKUser>)user;
+
+/**
+ *  This method or property should return the room object associated with the event,
+ *  that is, the event's room.
+ *  @return The requested room object. It must conform to the @c SCKUser protocol.
+ */
+- (id <SCKRoom>)room;
 
 /**
  *  This method or property should return the patient object associated with the event 
@@ -124,30 +163,5 @@ typedef NS_ENUM(NSUInteger, SCKEventType) {
  *  @param scheduledDate The new event's start date.
  */
 - (void)setScheduledDate:(NSDate*)scheduledDate;
-
-@end
-
-@protocol SCKRoom <NSObject>
-
-/**
- *  This method or property should return the string that will be drawn inside of the
- *  SCKRoomView's frame, which allows the user to better identify each room.
- *  @return The requested NSString object.
- */
-- (NSString*)title;
-
-/**
- *  This method or property should return a color that will be used to draw SCKRoomView
- *  @return The requested NSColor object.
- */
-- (NSColor*)labelColor;
-/**
- *  This method or property should return an array that will be used to draw SCKRoomView's
- *  frame, which allow the user to see the room capability
- *
- *  @return an array containing the room's capabilities
- */
-- (NSArray *)capabilities;
-
 
 @end

@@ -17,13 +17,22 @@
 - (NSInteger)dayCountForTheaterDayView:(SCKTheaterDayView*)tView;
 @end
 
+/** The SCKTheaterDayViewDataSource protocol includes two methods that can be used by an event
+ * manager to retrieve its contents from an auxiliary object. The method that will be invoked
+ * depends on the value of the `loadsEventsAsynchronously` property. */
+@protocol SCKTheaterDayViewDataSource <NSObject>
+@required
+- (NSArray *)requestsRooms;
+@end
+
 @interface SCKTheaterDayView : SCKGridView
 {
     SCKDayPoint *_dayStartPoint;
     SCKDayPoint *_dayEndPoint;
-    NSInteger *_roomCount;
+    NSArray *_RoomsArray;
 }
 
 @property (nonatomic, weak) id <SCKTheaterDayViewDelegate> delegate;
+@property (nonatomic, weak) id <SCKTheaterDayViewDataSource> datasource;
 
 @end

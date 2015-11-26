@@ -246,26 +246,24 @@ static NSDictionary * __subHourLabelAttrs = nil;
     [[NSColor colorWithCalibratedWhite:0.95 alpha:1.0] set];
     NSRectFill(RoomLabelingRect);
     CGFloat dayWidth = (NSWidth(self.frame) - kHourLabelWidth) / (CGFloat)_dayCount;
-    for (NSInteger d = 0; d < _dayCount; d++)
+    for (NSInteger d = 0; d < [[_datasource requestsRooms] count]; d++)
     {
+        id<SCKRoom> room = [_datasource requestsRooms][d];
 //        NSString *roomLabel = [[_dayLabelDateFormatter stringFromDate:dayDate] uppercaseString];
-        NSString *roomLabel = @"PLACEHOLDER";
+        NSString *roomLabel = [[room title] uppercaseString];
         NSSize roomLabelSize = [roomLabel sizeWithAttributes:__dayLabelAttrs];
         NSRect roomLabelRect = NSMakeRect(NSMinX(RoomLabelingRect)+dayWidth*(CGFloat)d,
                                          kDayLabelHeight/2.0-roomLabelSize.height/2.0,
                                          dayWidth,
                                          roomLabelSize.height);
-        if (d == 0)
-        {
-            roomLabelRect.origin.y -= 8.0;
-            NSString *capabilitiesLabel = @"capability placeholder";
-            NSSize capabilitiesLabelSize = [capabilitiesLabel sizeWithAttributes:__monthLabelAttrs];
-            NSRect capabilitiesLabelRect = NSMakeRect(roomLabelRect.origin.x,
-                                               kDayLabelHeight/2.0-roomLabelSize.height/2.0 + 7.0,
-                                               roomLabelRect.size.width,
-                                               capabilitiesLabelSize.height);
-            [capabilitiesLabel drawInRect:capabilitiesLabelRect withAttributes:__monthLabelAttrs];
-        }
+        roomLabelRect.origin.y -= 8.0;
+        NSString *capabilitiesLabel = [[[room capabilities] componentsJoinedByString:@" "] uppercaseString];
+        NSSize capabilitiesLabelSize = [capabilitiesLabel sizeWithAttributes:__monthLabelAttrs];
+        NSRect capabilitiesLabelRect = NSMakeRect(roomLabelRect.origin.x,
+                                                  kDayLabelHeight/2.0-roomLabelSize.height/2.0 + 7.0,
+                                                  roomLabelRect.size.width,
+                                                  capabilitiesLabelSize.height);
+        [capabilitiesLabel drawInRect:capabilitiesLabelRect withAttributes:__monthLabelAttrs];
         [roomLabel drawInRect:roomLabelRect withAttributes:__dayLabelAttrs];
         [[NSColor colorWithCalibratedWhite:0.85 alpha:1.0] set];
         NSRectFill(NSMakeRect(NSMinX(roomLabelRect)-0.5, 0.0, 1.0, NSHeight(self.frame)));

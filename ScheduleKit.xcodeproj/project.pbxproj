@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7C17BB0A1BBD900000E79E2D /* SCKTheaterDayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C17BB081BBD900000E79E2D /* SCKTheaterDayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7C17BB0B1BBD900000E79E2D /* SCKTheaterDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C17BB091BBD900000E79E2D /* SCKTheaterDayView.m */; };
+		7CA7C97C1C074F0500725E58 /* TestRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7C97B1C074F0500725E58 /* TestRoom.m */; };
 		990206FE1A50590D00912DF5 /* SCKEventManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 990206FC1A50590D00912DF5 /* SCKEventManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		990206FF1A50590D00912DF5 /* SCKEventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 990206FD1A50590D00912DF5 /* SCKEventManager.m */; };
 		990207021A535D0400912DF5 /* SCKGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = 990207001A535D0400912DF5 /* SCKGridView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -96,6 +97,8 @@
 /* Begin PBXFileReference section */
 		7C17BB081BBD900000E79E2D /* SCKTheaterDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCKTheaterDayView.h; sourceTree = "<group>"; };
 		7C17BB091BBD900000E79E2D /* SCKTheaterDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCKTheaterDayView.m; sourceTree = "<group>"; };
+		7CA7C97A1C074F0500725E58 /* TestRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestRoom.h; sourceTree = "<group>"; };
+		7CA7C97B1C074F0500725E58 /* TestRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRoom.m; sourceTree = "<group>"; };
 		990206FC1A50590D00912DF5 /* SCKEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCKEventManager.h; path = ScheduleKit/SCKEventManager.h; sourceTree = SOURCE_ROOT; };
 		990206FD1A50590D00912DF5 /* SCKEventManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCKEventManager.m; path = ScheduleKit/SCKEventManager.m; sourceTree = SOURCE_ROOT; };
 		990207001A535D0400912DF5 /* SCKGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCKGridView.h; sourceTree = "<group>"; };
@@ -213,6 +216,8 @@
 				995E938B1A634CB100A3D2BF /* TestUser.m */,
 				995E938D1A65EEB100A3D2BF /* TestEvent.h */,
 				995E938E1A65EEB100A3D2BF /* TestEvent.m */,
+				7CA7C97A1C074F0500725E58 /* TestRoom.h */,
+				7CA7C97B1C074F0500725E58 /* TestRoom.m */,
 				995E93901A65F29500A3D2BF /* WhiteView.h */,
 				995E93911A65F29500A3D2BF /* WhiteView.m */,
 				9A8E466F1B585044002DB2DF /* EventLoadingView.h */,
@@ -545,6 +550,7 @@
 				995E938F1A65EEB100A3D2BF /* TestEvent.m in Sources */,
 				9A8E46711B585044002DB2DF /* EventLoadingView.m in Sources */,
 				995E936F1A634C5100A3D2BF /* main.m in Sources */,
+				7CA7C97C1C074F0500725E58 /* TestRoom.m in Sources */,
 				995E938C1A634CB100A3D2BF /* TestUser.m in Sources */,
 				995E936D1A634C5100A3D2BF /* AppDelegate.m in Sources */,
 			);
