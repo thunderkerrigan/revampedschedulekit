@@ -114,11 +114,10 @@ typedef NS_ENUM(NSUInteger, SCKEventType) {
 - (id <SCKRoom>)room;
 
 /**
- *  This method or property should return the patient object associated with the event 
- *  if any. It's not being used at the time.
- *  @return The patient object.
+ *  Called to set the event's room.
+ *  @param room The new event's room.
  */
-- (id)patient;
+- (void)setRoom:(id <SCKRoom>)room;
 
 /**
  *  This method or property should return a color that will be used to draw SCKEventView's
