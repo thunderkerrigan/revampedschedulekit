@@ -63,7 +63,7 @@ typedef NS_ENUM(NSUInteger, SCKEventType) {
  *  Returns the event's date and time.
  *  @return A NSDate object representing the event's start date.
  */
-- (NSString*)roomId;
+- (NSNumber *)roomNumber;
 
 
 @end

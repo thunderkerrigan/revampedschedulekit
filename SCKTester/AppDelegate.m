@@ -21,11 +21,11 @@
     if (self) {
         __users = @[[[TestUser alloc] initWithName:@"Dr. Test 1" color:[NSColor colorWithCalibratedRed:0.9 green:0.65 blue:0.4 alpha:1.0]],[[TestUser alloc] initWithName:@"Dr. Test 2" color:[NSColor colorWithCalibratedRed:0.4 green:0.65 blue:0.9 alpha:1.0]]];
         _users = [NSMutableArray new];
-        __rooms = @[[[TestRoom alloc] initWithRoomId:@"1" labelColor:[NSColor cyanColor] capabilities:@[@"7.1", @"ATMOS", @"3D"] title:@"salle 1"],
-                    [[TestRoom alloc] initWithRoomId:@"2" labelColor:[NSColor redColor] capabilities:@[@"3D"] title:@"salle 2"],
-                    [[TestRoom alloc] initWithRoomId:@"3" labelColor:[NSColor magentaColor] capabilities:@[@"ATMOS", @"3D"] title:@"salle 3"],
-                    [[TestRoom alloc] initWithRoomId:@"4" labelColor:[NSColor yellowColor] capabilities:@[] title:@"salle 3"],
-                    [[TestRoom alloc] initWithRoomId:@"5" labelColor:[NSColor greenColor] capabilities:@[@"7.1"] title:@"salle 4"]];
+        __rooms = @[[[TestRoom alloc] initWithRoomNumber:@1 labelColor:[NSColor cyanColor] capabilities:@[@"7.1", @"ATMOS", @"3D"] title:@"salle 1"],
+                    [[TestRoom alloc] initWithRoomNumber:@2 labelColor:[NSColor redColor] capabilities:@[@"3D"] title:@"salle 2"],
+                    [[TestRoom alloc] initWithRoomNumber:@3 labelColor:[NSColor magentaColor] capabilities:@[@"ATMOS", @"3D"] title:@"salle 3"],
+                    [[TestRoom alloc] initWithRoomNumber:@4 labelColor:[NSColor yellowColor] capabilities:@[] title:@"salle 4"],
+                    [[TestRoom alloc] initWithRoomNumber:@5 labelColor:[NSColor greenColor] capabilities:@[@"7.1"] title:@"salle 5"]];
         _rooms = [NSMutableArray new];
         _eventArray = [[NSMutableArray alloc] initWithArray:[TestEvent sampleEvents:__users andRooms:__rooms]];
         _reloadingDayData = NO;

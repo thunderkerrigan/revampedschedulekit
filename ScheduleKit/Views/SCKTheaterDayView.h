@@ -35,4 +35,6 @@
 @property (nonatomic, weak) id <SCKTheaterDayViewDelegate> delegate;
 @property (nonatomic, weak) id <SCKTheaterDayViewDataSource> datasource;
 
+- (SCKRelativeTimeLocation)calculateRelativeTimeLocationForDate:(NSDate *)date andRoom:(id<SCKRoom>)room;
+
 @end

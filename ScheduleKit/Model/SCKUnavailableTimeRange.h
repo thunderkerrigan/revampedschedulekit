@@ -27,11 +27,11 @@
 @import Foundation;
 
 // NSCoding support keys:
-extern __nonnull NSString * const SCKBreakWeekdayKey;
-extern __nonnull NSString * const SCKBreakStartHourKey;
-extern __nonnull NSString * const SCKBreakStartMinuteKey;
-extern __nonnull NSString * const SCKBreakEndHourKey;
-extern __nonnull NSString * const SCKBreakEndMinuteKey;
+extern NSString * _Nonnull  const SCKBreakWeekdayKey;
+extern NSString * _Nonnull  const SCKBreakStartHourKey;
+extern NSString * _Nonnull  const SCKBreakStartMinuteKey;
+extern NSString * _Nonnull  const SCKBreakEndHourKey;
+extern NSString * _Nonnull  const SCKBreakEndMinuteKey;
 
 /**
  This class can be used to represent (and to make persistent copies) a break or

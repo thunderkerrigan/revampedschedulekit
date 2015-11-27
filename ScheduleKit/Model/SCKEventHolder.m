@@ -27,6 +27,7 @@
 #import "SCKEventHolder.h"
 #import "SCKEventView.h"
 #import "SCKView.h"
+#import "SCKTheaterDayView.h"
 #import "SCKEventManager.h"
 
 /*  DISCUSSION:
@@ -186,24 +187,46 @@
     if (_changesWhileLocked) {
         [_changesWhileLocked sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"keyPath" ascending:NO]]];
         for (NSDictionary *change in _changesWhileLocked) {
-            [self observeValueForKeyPath:change[@"keyPath"] ofObject:change[@"object"] change:change[@"change"] context:nil];
+            [self observeValueForKeyPath:change[@"keyPath"]
+                                ofObject:change[@"object"]
+                                  change:change[@"change"] context:nil];
         }
     }
     _changesWhileLocked = nil;
 }
 
-- (void)recalculateRelativeValues {
+- (void)recalculateRelativeValues
+{
     _ready = NO;
     _cachedRelativeStart = SCKRelativeTimeLocationNotFound;
     _cachedRelativeEnd = SCKRelativeTimeLocationNotFound;
     _cachedRelativeLength = 0;
-    if (_cachedScheduleDate != nil) {
-        _cachedRelativeStart = [_rootView calculateRelativeTimeLocationForDate:_cachedScheduleDate];
-        if (_cachedRelativeStart != SCKRelativeTimeLocationNotFound) {
-            if (_cachedDuration > 0.0) {
+    if (_cachedScheduleDate != nil)
+    {
+        if ([_rootView isKindOfClass:[SCKTheaterDayView class]] && _cachedRoom)
+        {
+            _cachedRelativeStart = [(SCKTheaterDayView *)_rootView calculateRelativeTimeLocationForDate:_cachedScheduleDate andRoom:_cachedRoom];
+        }
+        else
+        {
+            _cachedRelativeStart = [_rootView calculateRelativeTimeLocationForDate:_cachedScheduleDate];
+        }
+        if (_cachedRelativeStart != SCKRelativeTimeLocationNotFound)
+        {
+            if (_cachedDuration > 0.0)
+            {
                 NSDate *endDate = [_cachedScheduleDate dateByAddingTimeInterval:_cachedDuration * 60.0];
-                _cachedRelativeEnd = [_rootView calculateRelativeTimeLocationForDate:endDate];
-                if (_cachedRelativeEnd == SCKRelativeTimeLocationNotFound) {
+                if ([_rootView isKindOfClass:[SCKTheaterDayView class]] && _cachedRoom)
+                {
+                    _cachedRelativeEnd = [(SCKTheaterDayView *)_rootView calculateRelativeTimeLocationForDate:endDate andRoom:_cachedRoom];
+                }
+                else
+                {
+                    _cachedRelativeEnd = [_rootView calculateRelativeTimeLocationForDate:endDate];
+                }
+
+                if (_cachedRelativeEnd == SCKRelativeTimeLocationNotFound)
+                {
                     _cachedRelativeEnd = 1.0;
                 }
                 _cachedRelativeLength = _cachedRelativeEnd - _cachedRelativeStart;

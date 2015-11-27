@@ -372,5 +372,45 @@ static NSDictionary * __subHourLabelAttrs = nil;
     }
 }
 
+# pragma mark - calculateRelativeTime
+
+- (NSDate*)calculateDateForRelativeTimeLocation:(SCKRelativeTimeLocation)offset
+{
+    if (offset == SCKRelativeTimeLocationNotFound)
+    {
+        return nil;
+    }
+    else
+    {
+        int interval = (int)(_absoluteStartTimeRef + offset * [self absoluteTimeInterval]);
+        while ((interval % 60) > 0)
+        {
+            interval++;
+        }
+        return [NSDate dateWithTimeIntervalSinceReferenceDate:(double)interval];
+    }
+}
+
+- (SCKRelativeTimeLocation)calculateRelativeTimeLocationForDate:(NSDate *)date andRoom:(id<SCKRoom>)room
+{
+    if (date == nil)
+    {
+        NSParameterAssert(date);
+        return SCKRelativeTimeLocationNotFound;
+    }
+    NSTimeInterval timeRef = [date timeIntervalSinceReferenceDate];
+    if (timeRef < _absoluteStartTimeRef || timeRef > _absoluteEndTimeRef)
+    {
+        return SCKRelativeTimeLocationNotFound;
+    }
+    else
+    {
+        SCKRelativeTimeLocation percentageLocation = (timeRef - _absoluteStartTimeRef) / [self absoluteTimeInterval];
+        NSInteger multiplier = [[room roomNumber] integerValue];
+        NSInteger totalRooms = [[_datasource requestsRooms] count] - 1;
+        return multiplier * percentageLocation / totalRooms;
+    }
+}
+
 @dynamic delegate;
 @end
