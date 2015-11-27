@@ -12,14 +12,14 @@
 @interface TestRoom : NSObject <SCKRoom>
 
 + (NSArray*)sampleRooms:(NSArray*)roomArray;
-- (instancetype)initWithRoomId:(NSString *)roomId
-                    labelColor:(NSColor *)color
-                  capabilities:(NSArray*)capabilitiesArray
-                         title:(NSString *)title;
+- (instancetype)initWithRoomNumber:(NSNumber *)roomNumber
+                        labelColor:(NSColor *)color
+                      capabilities:(NSArray*)capabilitiesArray
+                             title:(NSString *)title;
 
 @property (strong) NSString *title;
 @property (strong) NSColor *labelColor;
 @property (strong) NSArray *capabilities;
-@property (strong) NSString *roomId;
+@property (strong) NSNumber *roomNumber;
 
 @end

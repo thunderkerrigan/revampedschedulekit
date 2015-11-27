@@ -10,15 +10,15 @@
 
 @implementation TestRoom
 
-- (instancetype)initWithRoomId:(NSString *)roomId
-                    labelColor:(NSColor *)color
-                  capabilities:(NSArray *)capabilitiesArray
-                         title:(NSString *)title
+- (instancetype)initWithRoomNumber:(NSNumber *)roomNumber
+                        labelColor:(NSColor *)color
+                      capabilities:(NSArray*)capabilitiesArray
+                             title:(NSString *)title
 {
     self = [self init];
     if (self)
     {
-        _roomId = roomId;
+        _roomNumber = roomNumber;
         _labelColor = color;
         _title = title;
         _capabilities = capabilitiesArray;
