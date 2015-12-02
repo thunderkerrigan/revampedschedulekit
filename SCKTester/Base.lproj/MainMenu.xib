@@ -754,8 +754,8 @@
                                                                     <rect key="frame" x="1" y="1" width="198" height="70"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
-                                                                        <datePicker verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yzg-Pn-Zy4">
-                                                                            <rect key="frame" x="7" y="44" width="114" height="22"/>
+                                                                        <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yzg-Pn-Zy4">
+                                                                            <rect key="frame" x="7" y="44" width="118" height="22"/>
                                                                             <animations/>
                                                                             <datePickerCell key="cell" controlSize="small" alignment="left" drawsBackground="NO" id="hp1-NF-fjD">
                                                                                 <font key="font" metaFont="smallSystem"/>
@@ -796,8 +796,8 @@
                                                                                 <binding destination="IDe-0S-Y3Q" name="value" keyPath="objectValue.duration" id="Rwk-77-uJs"/>
                                                                             </connections>
                                                                         </slider>
-                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aV1-Tx-MRi">
-                                                                            <rect key="frame" x="142" y="47" width="27" height="14"/>
+                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aV1-Tx-MRi">
+                                                                            <rect key="frame" x="143" y="47" width="26" height="14"/>
                                                                             <animations/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="180'" id="tPC-Gb-5GP">
                                                                                 <font key="font" metaFont="smallSystem"/>
@@ -932,8 +932,8 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="251" height="567"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4fd-vU-fyo" customClass="SCKDayView">
-                                                                    <rect key="frame" x="0.0" y="488" width="567" height="251"/>
+                                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="4fd-vU-fyo" customClass="SCKDayView">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="567" height="251"/>
                                                                     <animations/>
                                                                     <connections>
                                                                         <outlet property="eventManager" destination="fy9-p5-faF" id="A3L-si-iHP"/>
@@ -956,7 +956,7 @@
                                                             <animations/>
                                                         </scroller>
                                                         <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="ebT-QE-XTx">
-                                                            <rect key="frame" x="236" y="0.0" width="15" height="567"/>
+                                                            <rect key="frame" x="235" y="0.0" width="16" height="567"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <animations/>
                                                         </scroller>
@@ -1011,8 +1011,8 @@
                                                             <action selector="increaseDayOffset:" target="4fd-vU-fyo" id="krq-hx-XAa"/>
                                                         </connections>
                                                     </button>
-                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a1s-29-zha">
-                                                        <rect key="frame" x="143" y="8" width="44" height="17"/>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="a1s-29-zha">
+                                                        <rect key="frame" x="144" y="8" width="43" height="17"/>
                                                         <animations/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" alignment="right" title="Zoom:" id="skB-AC-Tgt">
                                                             <font key="font" metaFont="system"/>
@@ -1066,7 +1066,7 @@
                                                             <rect key="frame" x="1" y="1" width="166" height="79"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <customView horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kyo-sV-bp4" customClass="SCKTheaterDayView">
+                                                                <customView horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="kyo-sV-bp4" customClass="SCKTheaterDayView">
                                                                     <rect key="frame" x="0.0" y="0.0" width="697" height="567"/>
                                                                     <animations/>
                                                                     <connections>
@@ -1117,8 +1117,8 @@
                                                             <action selector="increaseZoomFactor:" target="kyo-sV-bp4" id="vYU-qI-9T6"/>
                                                         </connections>
                                                     </button>
-                                                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PYY-Ag-mid">
-                                                        <rect key="frame" x="36" y="6" width="76" height="19"/>
+                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PYY-Ag-mid">
+                                                        <rect key="frame" x="36" y="6" width="75" height="19"/>
                                                         <animations/>
                                                         <buttonCell key="cell" type="recessed" title="This week" bezelStyle="recessed" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="usb-69-gTq">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1136,8 +1136,8 @@
                                                             <font key="font" metaFont="systemBold" size="12"/>
                                                         </buttonCell>
                                                     </button>
-                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iga-HC-ztG">
-                                                        <rect key="frame" x="589" y="8" width="44" height="17"/>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Iga-HC-ztG">
+                                                        <rect key="frame" x="590" y="8" width="43" height="17"/>
                                                         <animations/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" alignment="right" title="Zoom:" id="FZX-mH-mDD">
                                                             <font key="font" metaFont="system"/>
@@ -1145,8 +1145,8 @@
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
-                                                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YoQ-LS-tU3">
-                                                        <rect key="frame" x="120" y="6" width="21" height="19"/>
+                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YoQ-LS-tU3">
+                                                        <rect key="frame" x="119" y="6" width="21" height="19"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="21" id="Mwk-rn-fBD"/>
                                                         </constraints>
@@ -1156,8 +1156,8 @@
                                                             <font key="font" metaFont="systemBold" size="12"/>
                                                         </buttonCell>
                                                     </button>
-                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Otv-BQ-6bM">
-                                                        <rect key="frame" x="147" y="8" width="84" height="18"/>
+                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="Otv-BQ-6bM">
+                                                        <rect key="frame" x="146" y="8" width="83" height="18"/>
                                                         <animations/>
                                                         <buttonCell key="cell" type="check" title="Saturdays" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="LKd-dc-UwM">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1167,8 +1167,8 @@
                                                             <binding destination="Voe-Tx-rLC" name="value" keyPath="showsSaturdays" id="2Pd-fj-wAP"/>
                                                         </connections>
                                                     </button>
-                                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A7h-cD-wfv">
-                                                        <rect key="frame" x="235" y="8" width="76" height="18"/>
+                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="A7h-cD-wfv">
+                                                        <rect key="frame" x="233" y="8" width="74" height="18"/>
                                                         <animations/>
                                                         <buttonCell key="cell" type="check" title="Sundays" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="90k-2G-lZw">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1179,8 +1179,8 @@
                                                             <binding destination="Voe-Tx-rLC" name="value" keyPath="showsSundays" id="dXR-XQ-HrG"/>
                                                         </connections>
                                                     </button>
-                                                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DME-je-GlK">
-                                                        <rect key="frame" x="555" y="6" width="28" height="19"/>
+                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DME-je-GlK">
+                                                        <rect key="frame" x="556" y="6" width="28" height="19"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="28" id="vAU-VX-zhx"/>
                                                         </constraints>
@@ -1254,7 +1254,7 @@
                 </constraints>
                 <animations/>
             </view>
-            <point key="canvasLocation" x="626" y="384"/>
+            <point key="canvasLocation" x="40" y="234"/>
         </window>
         <arrayController objectClassName="TestEvent" automaticallyRearrangesObjects="YES" id="rq2-9e-onH" userLabel="Day Array Controller">
             <connections>
@@ -1298,8 +1298,8 @@
                         <binding destination="Voe-Tx-rLC" name="value" keyPath="self.dayStartHour" id="s7L-9w-9Er"/>
                     </connections>
                 </slider>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3jE-dx-Bha">
-                    <rect key="frame" x="49" y="172" width="136" height="17"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3jE-dx-Bha">
+                    <rect key="frame" x="70" y="172" width="95" height="17"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Day start hour" drawsBackground="YES" id="mRh-Wl-tzQ">
                         <font key="font" metaFont="system"/>
@@ -1307,8 +1307,8 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3V0-DW-pXi">
-                    <rect key="frame" x="73" y="197" width="88" height="39"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3V0-DW-pXi">
+                    <rect key="frame" x="72" y="197" width="91" height="39"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="10:00" drawsBackground="YES" id="U80-GC-G3B">
                         <font key="font" metaFont="system" size="32"/>
@@ -1331,8 +1331,8 @@
                         <binding destination="Voe-Tx-rLC" name="value" keyPath="self.dayEndHour" id="zjQ-pL-RZk"/>
                     </connections>
                 </slider>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y0I-Jr-iUZ">
-                    <rect key="frame" x="58" y="50" width="118" height="17"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y0I-Jr-iUZ">
+                    <rect key="frame" x="73" y="50" width="89" height="17"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Day end hour" drawsBackground="YES" id="ZhZ-Ht-pae">
                         <font key="font" metaFont="system"/>
@@ -1340,8 +1340,8 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xIc-ed-zxG">
-                    <rect key="frame" x="73" y="77" width="88" height="39"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xIc-ed-zxG">
+                    <rect key="frame" x="70" y="77" width="94" height="39"/>
                     <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="23:00" drawsBackground="YES" id="7TJ-5m-uvC">
                         <font key="font" metaFont="system" size="32"/>
@@ -1411,8 +1411,8 @@
                         <binding destination="Voe-Tx-rLC" name="value" keyPath="self.calendarViewSelection" id="gBR-Ac-UET"/>
                     </connections>
                 </datePicker>
-                <button focusRingType="none" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40Q-iu-L6q">
-                    <rect key="frame" x="64" y="9" width="50" height="19"/>
+                <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="40Q-iu-L6q">
+                    <rect key="frame" x="64" y="9" width="51" height="19"/>
                     <animations/>
                     <buttonCell key="cell" type="recessed" title="Today" bezelStyle="recessed" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="2gq-w4-RDm">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

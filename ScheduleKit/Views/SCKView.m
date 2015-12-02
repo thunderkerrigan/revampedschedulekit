@@ -102,12 +102,14 @@
 }
 
 - (void)setStartDate:(NSDate *)startDate {
+    NSLog(@"start Date : %@", startDate);
     _startDate = startDate;
     _absoluteStartTimeRef = [startDate timeIntervalSinceReferenceDate];
     [self setNeedsDisplay:YES];
 }
 
 - (void)setEndDate:(NSDate *)endDate {
+    NSLog(@"end Date : %@", endDate);
     _endDate = endDate;
     _absoluteEndTimeRef = [endDate timeIntervalSinceReferenceDate];
     [self setNeedsDisplay:YES];

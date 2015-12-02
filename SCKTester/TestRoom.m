@@ -31,4 +31,17 @@
     return @[];
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    TestRoom *newTestroom = [[[self class] allocWithZone:zone] init];
+    if(newTestroom)
+    {
+        [newTestroom setRoomNumber:[self roomNumber]];
+        [newTestroom setLabelColor:[self labelColor]];
+        [newTestroom setTitle:[self title]];
+        [newTestroom setCapabilities:[self capabilities]];
+    }
+    return newTestroom;
+}
+
 @end

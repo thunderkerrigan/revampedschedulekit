@@ -47,7 +47,9 @@ static NSArray * __sorters = nil;
 - (NSInteger)positionInConflictForEventHolder:(SCKEventHolder*)e holdersInConflict:(NSArray**)conflictsPtr {
     SCKRelativeTimeLocation eStart = e.cachedRelativeStart;
     SCKRelativeTimeLocation eEnd = e.cachedRelativeEnd;
-    NSPredicate *filter = [NSPredicate predicateWithBlock:^BOOL(SCKEventHolder *x, NSDictionary *bindings) {
+    NSPredicate *filter = [NSPredicate predicateWithBlock:^BOOL(SCKEventHolder *x, NSDictionary *bindings)
+    {
+        NSLog(@" x is %@ with relativeEnd %f and relativeStart %f", [x isReady]? @"Ready": @"NOT Ready", x.cachedRelativeEnd, x.cachedRelativeStart);
         return ([x isReady] && !(x.cachedRelativeEnd <= eStart || x.cachedRelativeStart >= eEnd));
     }];
     NSArray *unsortedConflicts = [_managedContainers filteredArrayUsingPredicate:filter];
@@ -105,6 +107,7 @@ static NSArray * __sorters = nil;
                 [holder lock];
                 [_view removeEventView:holder.owningView];
                 [holder.owningView removeFromSuperview];
+                NSLog(@"we remove event %@", holder.cachedTitle);
                 [_managedContainers removeObject:holder];
             } else {
                 [events removeObject:holder.representedObject];
@@ -116,6 +119,7 @@ static NSArray * __sorters = nil;
             [_view addEventView:aView];
             SCKEventHolder *aHolder = [[SCKEventHolder alloc] initWithEvent:e owner:aView];
             aView.eventHolder = aHolder;
+            NSLog(@"we add event %@", aHolder.cachedTitle);
             [_managedContainers addObject:aHolder];
         }
         //TRIGGER RELAYOUT

@@ -29,12 +29,17 @@
 {
     SCKDayPoint *_dayStartPoint;
     SCKDayPoint *_dayEndPoint;
-    NSArray *_RoomsArray;
+    NSArray *_roomsArray;
+    NSInteger _roomsCount;
 }
 
 @property (nonatomic, weak) id <SCKTheaterDayViewDelegate> delegate;
 @property (nonatomic, weak) id <SCKTheaterDayViewDataSource> datasource;
 
-- (SCKRelativeTimeLocation)calculateRelativeTimeLocationForDate:(NSDate *)date andRoom:(id<SCKRoom>)room;
-
+- (NSDate*)calculateDateForRelativeTimeLocation:(SCKRelativeTimeLocation)offset andRoomNumber:(NSInteger)roomNumber;
+- (SCKRelativeTimeLocation)calculateRelativeTimeLocationForDate:(NSDate *)date andRoomNumber:(NSInteger)roomNumber;
+- (void)setDelegate:(id<SCKTheaterDayViewDelegate>)delegate andDatasource:(id<SCKTheaterDayViewDataSource>)datasource;
+- (id<SCKRoom>)roomWithRoomNumber:(NSInteger)roomNumber;
+- (id<SCKRoom>)roomWithLocation:(CGPoint)location;
+- (id<SCKRoom>)roomWithRelativeLocation:(SCKRelativeTimeLocation)location;
 @end

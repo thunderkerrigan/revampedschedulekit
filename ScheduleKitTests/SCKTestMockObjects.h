@@ -35,6 +35,8 @@
 @property (strong) NSString * title;
 @property (strong) NSNumber *duration;
 @property (strong) NSDate *scheduledDate;
+@property (strong) NSColor *backgroundColor;
+@property (weak) id <SCKRoom> room;
 @end
 
 @interface SCKMockUser : NSObject <SCKUser>

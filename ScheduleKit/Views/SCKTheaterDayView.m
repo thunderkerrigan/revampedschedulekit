@@ -16,6 +16,7 @@
 #define kHourLabelWidth 56.0
 #define kDayLabelHeight 36.0
 #define kMaxHourHeight 300.0
+#define kMinRoomWidth  200.0
 
 @implementation SCKTheaterDayView
 
@@ -42,36 +43,36 @@ static NSDictionary * __subHourLabelAttrs = nil;
 - (void)customInit
 {
     [super customInit];
-    _dayCount = 7;
-    _dayStartPoint = [[SCKDayPoint alloc] initWithHour:0 minute:0 second:0];
-    _dayEndPoint = [[SCKDayPoint alloc] initWithHour:21 minute:0 second:0];
-    _firstHour = _dayStartPoint.hour;
-    _hourCount = _dayEndPoint.hour - _dayStartPoint.hour;
-    [self invalidateIntrinsicContentSize];
 }
 
 - (void)setStartDate:(NSDate *)startDate
 {
     [super setStartDate:startDate];
-    if (self.endDate)
-    {
-        _dayCount = [_calendar components:NSCalendarUnitDay fromDate:startDate toDate:self.endDate options:0].day;
-    }
 }
 
 - (void)setEndDate:(NSDate *)endDate
 {
     [super setEndDate:endDate];
-    if (self.startDate)
-    {
-        _dayCount = [_calendar components:NSCalendarUnitDay fromDate:self.startDate toDate:endDate options:0].day;
-    }
+}
+
+- (void)setDelegate:(id<SCKTheaterDayViewDelegate>)delegate andDatasource:(id<SCKTheaterDayViewDataSource>)datasource
+{
+    self.delegate = delegate;
+    self.datasource = datasource;
+    [self readDefaultsFromDelegate];
 }
 
 - (void)readDefaultsFromDelegate
 {
     [super readDefaultsFromDelegate]; // Sets up unavailable ranges and marks as needing display
-    
+    if (self.datasource != nil)
+    {
+        if ([self.datasource respondsToSelector:@selector(requestsRooms)])
+        {
+            _roomsArray = [self.datasource requestsRooms];
+            _roomsCount = [_roomsArray count];
+        }
+    }
     if (self.delegate != nil)
     {
         _dayStartPoint = [[SCKDayPoint alloc] initWithHour:[self.delegate dayStartHourForTheaterDayView:self] minute:0 second:0];
@@ -79,16 +80,6 @@ static NSDictionary * __subHourLabelAttrs = nil;
         _firstHour = _dayStartPoint.hour;
         _hourCount = _dayEndPoint.hour - _dayStartPoint.hour;
         [self invalidateIntrinsicContentSize];
-        
-        if ([self.delegate respondsToSelector:@selector(dayCountForTheaterDayView:)])
-        {
-            NSInteger dayCount = [self.delegate dayCountForTheaterDayView:self];
-            if (_dayCount != dayCount)
-            {
-                self.endDate = [_calendar dateByAddingUnit:NSCalendarUnitDay value:dayCount toDate:self.startDate options:0];
-                [self.eventManager reloadData];
-            }
-        }
         [self triggerRelayoutForAllEventViews]; //Trigger this even if we call reloadData because it may not reload anything
     }
 }
@@ -104,7 +95,7 @@ static NSDictionary * __subHourLabelAttrs = nil;
 - (NSRect)rectForUnavailableTimeRange:(SCKUnavailableTimeRange *)rng
 {
     NSRect canvasRect = [self contentRect];
-    CGFloat dayWidth = NSWidth(canvasRect)/(CGFloat)_dayCount;
+    CGFloat roomWidth = NSWidth(canvasRect)/(CGFloat)_roomsCount;
     NSDate *sDate = [_calendar dateBySettingHour:rng.startHour minute:rng.startMinute second:0 ofDate:self.startDate options:0];
     SCKRelativeTimeLocation sOffset = [self calculateRelativeTimeLocationForDate:sDate];
     if (sOffset != SCKRelativeTimeLocationNotFound)
@@ -122,7 +113,7 @@ static NSDictionary * __subHourLabelAttrs = nil;
             yOrigin = [self yForHour:rng.startHour minute:rng.startMinute];
             yLength = NSMaxY(self.frame) - yOrigin;
         }
-        return NSMakeRect(NSMinX(canvasRect) + (CGFloat)rng.weekday * dayWidth, yOrigin, dayWidth, yLength);
+        return NSMakeRect(NSMinX(canvasRect), yOrigin, roomWidth* _roomsCount, yLength);
     }
     else
     {
@@ -137,13 +128,12 @@ static NSDictionary * __subHourLabelAttrs = nil;
     NSRect canvasRect = [self contentRect];
     NSRect oldFrame = eventView.frame;
     
-    NSAssert1(_dayCount > 0, @"Day count must be greater than zero. %lu found instead.",_dayCount);
-    SCKRelativeTimeLocation offsetPerDay = 1.0/(double)_dayCount;
+    NSAssert1(_roomsCount > 0, @"Room count must be greater than zero. %lu found instead.",_roomsCount);
     SCKRelativeTimeLocation startOffset = eventView.eventHolder.cachedRelativeStart;
     NSAssert1(startOffset != SCKRelativeTimeLocationNotFound, @"Expected relativeStart to be set for holder: %@", eventView.eventHolder);
-    NSInteger day = (NSInteger)trunc(startOffset/offsetPerDay);
-    CGFloat dayWidth = NSWidth(canvasRect)/(CGFloat)_dayCount;
-    
+//    NSInteger room = (NSInteger)ceil(startOffset/_roomsCount);
+    NSInteger roomIndex = trunc(startOffset);
+    CGFloat roomWidth = NSWidth(canvasRect)/(CGFloat)_roomsCount;
     NSRect newFrame = NSZeroRect;
     
     NSDate *scheduledDate = eventView.eventHolder.cachedScheduleDate;
@@ -156,14 +146,19 @@ static NSDictionary * __subHourLabelAttrs = nil;
     NSInteger idx = [[self eventManager] positionInConflictForEventHolder:eventView.eventHolder holdersInConflict:&conflicts];
     if ([conflicts count] > 0)
     {
-        newFrame.size.width = dayWidth / (CGFloat)[conflicts count];
+        newFrame.size.width = roomWidth / (CGFloat)[conflicts count];
     }
     else
     {
-        newFrame.size.width = dayWidth;
+        newFrame.size.width = roomWidth;
     }
-    newFrame.origin.x = canvasRect.origin.x + (CGFloat)day * dayWidth + (newFrame.size.width * (CGFloat)idx);
-    
+    newFrame.origin.x = canvasRect.origin.x + (CGFloat)roomIndex * roomWidth + (newFrame.size.width * (CGFloat)idx);
+    if (eventView.eventHolder.cachedRoomIndex != roomIndex)
+    {
+        id<SCKEvent> e = (id<SCKEvent>)eventView.eventHolder.representedObject;
+        
+        [e setRoom:[self roomWithRoomNumber:roomIndex]];
+    }
     if (!NSEqualRects(oldFrame, newFrame))
     {
         if (animation)
@@ -177,27 +172,82 @@ static NSDictionary * __subHourLabelAttrs = nil;
     }
 }
 
+- (id<SCKRoom>)roomWithRoomNumber:(NSInteger)roomNumber
+{
+    if ([_roomsArray count]> roomNumber)
+    {
+        return _roomsArray[roomNumber];
+    }
+    else
+    {
+        return nil;
+    }
+
+}
+
+- (id<SCKRoom>)roomWithLocation:(CGPoint)location
+{
+    NSRect canvasRect = [self contentRect];
+    if (NSPointInRect(location, canvasRect))
+    {
+        //column's width of a represented room total width divided by number of room
+        CGFloat roomWidth = NSWidth(canvasRect)/(CGFloat)_roomsCount;
+        
+        //true position of x on current view
+        CGFloat trueX = location.x-NSMinX(canvasRect);
+        
+        //room
+        NSInteger roomNumber = (NSInteger)trunc(trueX / roomWidth);
+        return _roomsArray[roomNumber];
+    }
+    else
+    {
+        return nil;
+    }
+}
+
+- (id<SCKRoom>)roomWithRelativeLocation:(SCKRelativeTimeLocation)location
+{
+    NSInteger roomNumber = ceil(floor(location));
+    if (roomNumber < [_roomsArray count])
+    {
+        return _roomsArray[roomNumber];
+    }
+    else
+    {
+        return nil;
+    }
+}
+
 - (SCKRelativeTimeLocation)relativeTimeLocationForPoint:(NSPoint)location
 {
     NSRect canvasRect = [self contentRect];
     if (NSPointInRect(location, canvasRect))
     {
-        CGFloat dayWidth = NSWidth(canvasRect)/(CGFloat)_dayCount;
-        SCKRelativeTimeLocation offsetPerDay = 1.0/(double)_dayCount;
-        NSInteger day = (NSInteger)trunc((location.x-NSMinX(canvasRect))/dayWidth);
-        SCKRelativeTimeLocation dayOffset = offsetPerDay * (double)day;
+        //column's width of a represented room total width divided by number of room
+        CGFloat roomWidth = NSWidth(canvasRect)/(CGFloat)_roomsCount;
+        
+        //true position of x on current view
+        CGFloat trueX = location.x-NSMinX(canvasRect);
+        
+        //room
+        NSInteger roomIndex = (NSInteger)trunc(trueX / roomWidth);
+        SCKRelativeTimeLocation roomOffset = (double)roomIndex;
         SCKRelativeTimeLocation offsetPerMin = [self calculateRelativeTimeLocationForDate:[self.startDate dateByAddingTimeInterval:60]];
         SCKRelativeTimeLocation offsetPerHour = 60.0 * offsetPerMin;
         CGFloat totalMinutes = (double)(60*_hourCount);
         CGFloat minute = totalMinutes * (location.y-NSMinY(canvasRect)) / NSHeight(canvasRect);
         SCKRelativeTimeLocation minuteOffset = offsetPerMin * minute;
-        return dayOffset + offsetPerHour * (double)_firstHour + minuteOffset;
+        SCKRelativeTimeLocation pointOffset = roomOffset + offsetPerHour * (double)_firstHour + minuteOffset;
+        return pointOffset;
     }
     else
     {
         return SCKRelativeTimeLocationNotFound;
     }
 }
+
+
 
 /**
  *  overridden method 
@@ -209,8 +259,6 @@ static NSDictionary * __subHourLabelAttrs = nil;
 //    [super drawRect:dirtyRect]; // Fills background
     [[NSColor whiteColor] setFill];
     NSRectFill(dirtyRect);
-    //todo
-    // draw day view --> convert for roomview
     if ((_absoluteStartTimeRef < _absoluteEndTimeRef) &&
         (_hourCount > 0))
     {
@@ -245,16 +293,15 @@ static NSDictionary * __subHourLabelAttrs = nil;
                                         kDayLabelHeight);
     [[NSColor colorWithCalibratedWhite:0.95 alpha:1.0] set];
     NSRectFill(RoomLabelingRect);
-    CGFloat dayWidth = (NSWidth(self.frame) - kHourLabelWidth) / (CGFloat)_dayCount;
-    for (NSInteger d = 0; d < [[_datasource requestsRooms] count]; d++)
+    CGFloat roomWidth = (NSWidth(self.frame) - kHourLabelWidth) / (CGFloat)_roomsCount;
+    for (NSInteger d = 0; d < _roomsCount; d++)
     {
-        id<SCKRoom> room = [_datasource requestsRooms][d];
-//        NSString *roomLabel = [[_dayLabelDateFormatter stringFromDate:dayDate] uppercaseString];
+        id<SCKRoom> room = _roomsArray[d];
         NSString *roomLabel = [[room title] uppercaseString];
         NSSize roomLabelSize = [roomLabel sizeWithAttributes:__dayLabelAttrs];
-        NSRect roomLabelRect = NSMakeRect(NSMinX(RoomLabelingRect)+dayWidth*(CGFloat)d,
+        NSRect roomLabelRect = NSMakeRect(NSMinX(RoomLabelingRect)+roomWidth*(CGFloat)d,
                                          kDayLabelHeight/2.0-roomLabelSize.height/2.0,
-                                         dayWidth,
+                                         roomWidth,
                                          roomLabelSize.height);
         roomLabelRect.origin.y -= 8.0;
         NSString *capabilitiesLabel = [[[room capabilities] componentsJoinedByString:@" "] uppercaseString];
@@ -349,11 +396,11 @@ static NSDictionary * __subHourLabelAttrs = nil;
     //Bottom guide
     fill(NSMidX(eventRect)-1.0, NSMaxY(eventRect), 2.0, NSHeight(self.frame)-NSMaxY(eventRect));
     
-    CGFloat dayWidth = NSWidth(canvasRect) / (CGFloat)_dayCount;
-    SCKRelativeTimeLocation offsetPerDay = 1.0/(double)_dayCount;
+    CGFloat roomWidth = NSWidth(canvasRect) / (CGFloat)_roomsCount;
     SCKRelativeTimeLocation startOffset = [self relativeTimeLocationForPoint:NSMakePoint(NSMidX(eV.frame), NSMinY(eV.frame))];
-    if (startOffset != SCKRelativeTimeLocationNotFound) {
-        fill(NSMinX(canvasRect)+dayWidth*trunc(startOffset/offsetPerDay), NSMinY(canvasRect), dayWidth, 2.0);
+    if (startOffset != SCKRelativeTimeLocationNotFound)
+    {
+        fill(NSMinX(canvasRect)+roomWidth*trunc(startOffset), NSMinY(canvasRect), roomWidth, 2.0);
         
         NSDate *startDate = [self calculateDateForRelativeTimeLocation:startOffset];
         SCKDayPoint *sPoint = [[SCKDayPoint alloc] initWithDate:startDate];
@@ -374,24 +421,48 @@ static NSDictionary * __subHourLabelAttrs = nil;
 
 # pragma mark - calculateRelativeTime
 
-- (NSDate*)calculateDateForRelativeTimeLocation:(SCKRelativeTimeLocation)offset
+
+- (NSDate *)calculateDateForRelativeTimeLocation:(SCKRelativeTimeLocation)offset
 {
-    if (offset == SCKRelativeTimeLocationNotFound)
-    {
+    if (offset == SCKRelativeTimeLocationNotFound) {
         return nil;
-    }
-    else
-    {
-        int interval = (int)(_absoluteStartTimeRef + offset * [self absoluteTimeInterval]);
-        while ((interval % 60) > 0)
-        {
+    } else {
+        double flooredOffset = offset - floor(offset);
+        int interval = (int)(_absoluteStartTimeRef + flooredOffset * [self absoluteTimeInterval]);
+        while ((interval % 60) > 0) {
             interval++;
         }
         return [NSDate dateWithTimeIntervalSinceReferenceDate:(double)interval];
     }
 }
 
-- (SCKRelativeTimeLocation)calculateRelativeTimeLocationForDate:(NSDate *)date andRoom:(id<SCKRoom>)room
+//- (SCKRelativeTimeLocation)calculateRelativeTimeLocationForDate:(NSDate *)date
+//{
+//    NSLog(@"SHOULD NOT BE TRIGGERED!!!!");
+//    return 0.0f;
+//}
+
+- (NSDate*)calculateDateForRelativeTimeLocation:(SCKRelativeTimeLocation)offset andRoomNumber:(NSInteger)roomNumber
+{
+    return [self calculateDateForRelativeTimeLocation:offset];
+//    if (offset == SCKRelativeTimeLocationNotFound)
+//    {
+//        return nil;
+//    }
+//    else
+//    {
+//        CGFloat timeOffset = offset -roomNumber;
+//        int interval = (int)(_absoluteStartTimeRef + timeOffset * [self absoluteTimeInterval]);
+//        while ((interval % 60) > 0)
+//        {
+//            interval++;
+//        }
+//        NSLog(@" offset %f for room %ld is at date : %@", offset, roomNumber, [NSDate dateWithTimeIntervalSinceReferenceDate:(double)interval]);
+//        return [NSDate dateWithTimeIntervalSinceReferenceDate:(double)interval];
+//    }
+}
+
+- (SCKRelativeTimeLocation)calculateRelativeTimeLocationForDate:(NSDate *)date andRoomNumber:(NSInteger)roomNumber
 {
     if (date == nil)
     {
@@ -406,11 +477,9 @@ static NSDictionary * __subHourLabelAttrs = nil;
     else
     {
         SCKRelativeTimeLocation percentageLocation = (timeRef - _absoluteStartTimeRef) / [self absoluteTimeInterval];
-        NSInteger multiplier = [[room roomNumber] integerValue];
-        NSInteger totalRooms = [[_datasource requestsRooms] count] - 1;
-        return multiplier * percentageLocation / totalRooms;
+        return percentageLocation + roomNumber;
     }
 }
 
-@dynamic delegate;
+@dynamic delegate, datasource;
 @end

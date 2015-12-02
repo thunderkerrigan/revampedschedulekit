@@ -105,6 +105,8 @@
 @property (strong, nullable) NSColor *cachedUserLabelColor;
 @property (strong, nullable) NSColor *cachedBackgroundEventColor;
 @property (strong, nullable) NSString *cachedTitle;
+@property (assign) NSInteger cachedRoomIndex;
+@property (strong, nullable) id<SCKRoom> cachedRoom;
 @property (strong, nullable) NSDate *cachedScheduleDate;
 @property (assign) NSInteger cachedDuration;
 @end

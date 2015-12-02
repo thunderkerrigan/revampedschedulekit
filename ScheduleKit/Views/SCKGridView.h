@@ -38,6 +38,7 @@
 - (IBAction)decreaseZoomFactor:(id)sender;
 
 @property (nonatomic, weak) id <SCKGridViewDelegate> delegate;
+@property (nonatomic, weak) id <NSObject> datasource;
 @property (nonatomic, assign) CGFloat hourHeight;
 @property (readonly) NSRect contentRect;
 @end

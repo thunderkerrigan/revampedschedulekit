@@ -28,6 +28,7 @@
 #import "SCKGridView.h"
 #import "SCKEventManager.h"
 #import "SCKViewPrivate.h"
+#import "SCKTheaterDayView.h"
 
 SCKActionContext SCKActionContextZero() {
     SCKActionContext cx;
@@ -168,7 +169,17 @@ static NSColor *__specialEventStrokeColor;
     NSPoint superLoc = [view convertPoint:theEvent.locationInWindow fromView:nil];
     
     NSDate *sDate = _eventHolder.cachedScheduleDate;
-    NSDate *eDate = [view calculateDateForRelativeTimeLocation:[view relativeTimeLocationForPoint:superLoc]]; //Get new end
+    NSDate *eDate;
+    if ([view isKindOfClass:[SCKTheaterDayView class]])
+    {
+        SCKTheaterDayView *theaterView = (SCKTheaterDayView*)view;
+        eDate = [theaterView calculateDateForRelativeTimeLocation:[view relativeTimeLocationForPoint:superLoc]]; //Get new end
+    }
+    else
+    {
+        eDate = [view calculateDateForRelativeTimeLocation:[view relativeTimeLocationForPoint:superLoc]]; //Get new end
+    }
+    
     _actionContext.newDuration = (NSInteger)([eDate timeIntervalSinceDate:sDate] / 60.0); // Calculate new duration
     if (_actionContext.newDuration != _actionContext.lastDuration) { // Check if difers from last call
         if (_actionContext.newDuration >= 5) {
@@ -187,21 +198,57 @@ static NSColor *__specialEventStrokeColor;
 
 - (void)parseContentDrag:(NSEvent*)theEvent {
     SCKGridView *view = (SCKGridView*)self.superview;
-    NSPoint tPoint = [view convertPoint:theEvent.locationInWindow fromView:nil];
+    NSPoint tPoint;
+    tPoint = [view convertPoint:theEvent.locationInWindow fromView:nil];
     tPoint.y -= _actionContext.internalDelta;
     
-    SCKRelativeTimeLocation newStartLoc = [view relativeTimeLocationForPoint:tPoint];
+    SCKRelativeTimeLocation newStartLoc;
+    if ([view isKindOfClass:[SCKTheaterDayView class]])
+    {
+        SCKTheaterDayView* theaterView = (SCKTheaterDayView*)view;
+        newStartLoc = [theaterView relativeTimeLocationForPoint:tPoint];
+    }
+    else
+    {
+        newStartLoc = [view relativeTimeLocationForPoint:tPoint];
+    }
+    
     if (newStartLoc == SCKRelativeTimeLocationNotFound && (tPoint.y < NSMidY(view.frame))) { // May be too close to an edge. Check if too low
         tPoint.y = NSMinY([view contentRect]);
-        newStartLoc = [view relativeTimeLocationForPoint:tPoint];
+        if ([view isKindOfClass:[SCKTheaterDayView class]])
+        {
+            SCKTheaterDayView* theaterView = (SCKTheaterDayView*)view;
+            newStartLoc = [theaterView relativeTimeLocationForPoint:tPoint];
+        }
+        else
+        {
+            newStartLoc = [view relativeTimeLocationForPoint:tPoint];
+        }
     }
     if (newStartLoc != SCKRelativeTimeLocationNotFound) {
         tPoint.y += NSHeight(self.frame);
-        SCKRelativeTimeLocation newEndLoc =[view relativeTimeLocationForPoint:tPoint];
+        SCKRelativeTimeLocation newEndLoc;
+        if ([view isKindOfClass:[SCKTheaterDayView class]])
+        {
+            SCKTheaterDayView* theaterView = (SCKTheaterDayView*)view;
+            newEndLoc =[theaterView relativeTimeLocationForPoint:tPoint];
+        }
+        else
+        {
+            newEndLoc =[view relativeTimeLocationForPoint:tPoint];
+        }
         if (newEndLoc != SCKRelativeTimeLocationNotFound) {
             _eventHolder.cachedRelativeStart = newStartLoc;
             _eventHolder.cachedRelativeEnd = newEndLoc;
-            _eventHolder.cachedScheduleDate = [view calculateDateForRelativeTimeLocation:newStartLoc];
+            if ([view isKindOfClass:[SCKTheaterDayView class]])
+            {
+                SCKTheaterDayView* theaterView = (SCKTheaterDayView*)view;
+                _eventHolder.cachedScheduleDate = [theaterView calculateDateForRelativeTimeLocation:newStartLoc andRoomNumber:[[[theaterView roomWithLocation:tPoint] roomNumber] integerValue]];
+            }
+            else
+            {
+                _eventHolder.cachedScheduleDate = [view calculateDateForRelativeTimeLocation:newStartLoc];
+            }
             _actionContext.newRelativeStart = newStartLoc;
         }
     }
@@ -230,13 +277,30 @@ static NSColor *__specialEventStrokeColor;
         } break;
         case SCKDraggingStatusDraggingContent: {
             BOOL changeAllowed = YES;
-            NSDate *scheduledDate = [view calculateDateForRelativeTimeLocation:_actionContext.newRelativeStart];
+            NSDate *scheduledDate;
+            id<SCKRoom> newRoom;
+            if ([view isKindOfClass:[SCKTheaterDayView class]])
+            {
+                SCKTheaterDayView* theaterView = (SCKTheaterDayView*)view;
+                scheduledDate = [theaterView calculateDateForRelativeTimeLocation:_actionContext.newRelativeStart];
+                newRoom = [theaterView roomWithRelativeLocation:_actionContext.newRelativeStart];
+            }
+            else
+            {
+                scheduledDate = [view calculateDateForRelativeTimeLocation:_actionContext.newRelativeStart];
+            }
             if ([view.eventManager.delegate respondsToSelector:@selector(eventManager:shouldChangeDateOfEvent:fromValue:toValue:)]) {
                 changeAllowed = [view.eventManager.delegate eventManager:view.eventManager shouldChangeDateOfEvent:_eventHolder.representedObject fromValue:[_eventHolder.representedObject scheduledDate] toValue:scheduledDate];
             }
             if (changeAllowed) {
                 [_eventHolder stopObservingRepresentedObjectChanges];
                 [_eventHolder.representedObject setScheduledDate:scheduledDate];
+                if ([view isKindOfClass:[SCKTheaterDayView class]])
+                {
+                    [_eventHolder.representedObject setRoom:newRoom];
+                    _eventHolder.cachedRoom = newRoom;
+                    _eventHolder.cachedRoomIndex = [[newRoom roomNumber] integerValue] - 1;
+                }
                 [_eventHolder resumeObservingRepresentedObjectChanges];
                 [_eventHolder recalculateRelativeValues];
                 [view triggerRelayoutForAllEventViews];

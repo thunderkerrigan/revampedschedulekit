@@ -40,7 +40,7 @@
     
     BOOL            _observing; // Indicates wether we're observing changes in represented object or not.
     __weak id       _cachedUser; // A weak reference to @c representedObject's user (to safely parse labelColor changes)
-    __weak id       _cachedRoom; // A weak reference to @c representedObject's user (to safely parse labelColor changes)
+
     __weak id       _eventManager; // A convenience reference to the event manager.
     __weak SCKView* _rootView; // A convenience reference to owningView's superview.
     NSInteger       _lockBalance; // The number of times @c lock: has been called over @c unlock:
@@ -68,6 +68,7 @@
         _cachedScheduleDate = [[e scheduledDate] copy];
         _cachedDuration = [[e duration] integerValue];
         _cachedRoom = [e room];
+        _cachedRoomIndex= [[_cachedRoom roomNumber] integerValue] - 1;
         _owningView = v;
         _rootView = (SCKView*)_owningView.superview;
         _eventManager = [_rootView eventManager];
@@ -92,6 +93,7 @@
         [obj removeObserver:self forKeyPath:NSStringFromSelector(@selector(duration))];
         [obj removeObserver:self forKeyPath:NSStringFromSelector(@selector(title))];
         [obj removeObserver:self forKeyPath:NSStringFromSelector(@selector(user))];
+        [obj removeObserver:self forKeyPath:NSStringFromSelector(@selector(room))];
     }
     _observing = NO;
 }
@@ -107,6 +109,8 @@
         [obj addObserver:self forKeyPath:NSStringFromSelector(@selector(title))
                  options:NSKeyValueObservingOptionNew context:NULL];
         [obj addObserver:self forKeyPath:NSStringFromSelector(@selector(user))
+                 options:NSKeyValueObservingOptionNew context:NULL];
+        [obj addObserver:self forKeyPath:NSStringFromSelector(@selector(room))
                  options:NSKeyValueObservingOptionNew context:NULL];
         _observing = YES;
     }
@@ -155,6 +159,9 @@
         } else if ([keyPath isEqualToString:NSStringFromSelector(@selector(title))]) {
             _cachedTitle = [theNewValue copy];
             _owningView.innerLabel.stringValue = _cachedTitle;
+        } else if ([keyPath isEqualToString:NSStringFromSelector(@selector(room))]) {
+            _cachedRoom = [theNewValue copy];
+//            [_eventManager reloadData];
         } else if ([keyPath isEqualToString:NSStringFromSelector(@selector(user))]) {
             if (_cachedUser != theNewValue) {
                 _cachedUser = theNewValue;
@@ -205,7 +212,7 @@
     {
         if ([_rootView isKindOfClass:[SCKTheaterDayView class]] && _cachedRoom)
         {
-            _cachedRelativeStart = [(SCKTheaterDayView *)_rootView calculateRelativeTimeLocationForDate:_cachedScheduleDate andRoom:_cachedRoom];
+            _cachedRelativeStart = [(SCKTheaterDayView *)_rootView calculateRelativeTimeLocationForDate:_cachedScheduleDate andRoomNumber:_cachedRoomIndex];
         }
         else
         {
@@ -218,7 +225,7 @@
                 NSDate *endDate = [_cachedScheduleDate dateByAddingTimeInterval:_cachedDuration * 60.0];
                 if ([_rootView isKindOfClass:[SCKTheaterDayView class]] && _cachedRoom)
                 {
-                    _cachedRelativeEnd = [(SCKTheaterDayView *)_rootView calculateRelativeTimeLocationForDate:endDate andRoom:_cachedRoom];
+                    _cachedRelativeEnd = [(SCKTheaterDayView *)_rootView calculateRelativeTimeLocationForDate:endDate andRoomNumber:_cachedRoomIndex];
                 }
                 else
                 {

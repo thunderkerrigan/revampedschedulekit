@@ -25,7 +25,9 @@
                     [[TestRoom alloc] initWithRoomNumber:@2 labelColor:[NSColor redColor] capabilities:@[@"3D"] title:@"salle 2"],
                     [[TestRoom alloc] initWithRoomNumber:@3 labelColor:[NSColor magentaColor] capabilities:@[@"ATMOS", @"3D"] title:@"salle 3"],
                     [[TestRoom alloc] initWithRoomNumber:@4 labelColor:[NSColor yellowColor] capabilities:@[] title:@"salle 4"],
-                    [[TestRoom alloc] initWithRoomNumber:@5 labelColor:[NSColor greenColor] capabilities:@[@"7.1"] title:@"salle 5"]];
+                    [[TestRoom alloc] initWithRoomNumber:@5 labelColor:[NSColor greenColor] capabilities:@[@"7.1", @"3D"] title:@"salle 5"],
+                    [[TestRoom alloc] initWithRoomNumber:@6 labelColor:[NSColor greenColor] capabilities:@[@"7.1", @"ATMOS"] title:@"salle 6"],
+                    [[TestRoom alloc] initWithRoomNumber:@7 labelColor:[NSColor greenColor] capabilities:@[] title:@"salle 7"]];
         _rooms = [NSMutableArray new];
         _eventArray = [[NSMutableArray alloc] initWithArray:[TestEvent sampleEvents:__users andRooms:__rooms]];
         _reloadingDayData = NO;
@@ -77,8 +79,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     NSCalendar *cal = [NSCalendar currentCalendar];
-    NSDate *dayBeginning = [cal dateBySettingHour:7 minute:0 second:0 ofDate:[NSDate date] options:0];
-    NSDate *dayEnding = [cal dateBySettingHour:17 minute:0 second:0 ofDate:[NSDate date] options:0];
+    NSDate *dayBeginning = [cal dateBySettingHour:0 minute:0 second:0 ofDate:[NSDate date] options:0];
+    NSDate *dayEnding = [cal dateByAddingUnit:NSCalendarUnitDay value:1 toDate:dayBeginning options:0];
     _dayEventManager.view.startDate = dayBeginning;
     _dayEventManager.view.endDate = dayEnding;
     _dayEventManager.dataSource = self;
@@ -88,15 +90,15 @@
     
     NSDate *weekBeginning;
     [cal rangeOfUnit:NSCalendarUnitWeekOfYear startDate:&weekBeginning interval:nil forDate:[NSDate date]];
-    NSDate *weekEnding = [cal dateByAddingUnit:NSCalendarUnitWeekOfYear value:1 toDate:weekBeginning options:0];
-    _weekEventManager.view.startDate = weekBeginning;
-    _weekEventManager.view.endDate = weekEnding;
+//    NSDate *weekEnding = [cal dateByAddingUnit:NSCalendarUnitDay value:1 toDate:weekBeginning options:0];
+    _weekEventManager.view.startDate = dayBeginning;
+    _weekEventManager.view.endDate = dayEnding;
     _weekEventManager.dataSource = self;
     _weekEventManager.delegate = self;
-    _weekEventManager.loadsEventsAsynchronously = YES;
+//    _weekEventManager.loadsEventsAsynchronously = YES;
+    [(SCKTheaterDayView*)_weekEventManager.view setDelegate:self andDatasource:self];
+    [(SCKGridView *)_weekEventManager.view setHourHeight:20];
     [_weekEventManager reloadData];
-    [(SCKGridView*)_weekEventManager.view setDelegate:self];
-    [(SCKTheaterDayView*)_weekEventManager.view setDatasource:self];
     
     [_dayEventArrayController addObserver:self forKeyPath:@"arrangedObjects.count" options:NSKeyValueObservingOptionNew context:nil];
     [_weekEventArrayController addObserver:self forKeyPath:@"arrangedObjects.count" options:NSKeyValueObservingOptionNew context:nil];
@@ -218,7 +220,7 @@
     }
 }
 
-#pragma mark - SCKEventManager Delegate
+//#pragma mark - SCKEventManager Delegate
 
 - (void)eventManager:(SCKEventManager *)eM didSelectEvent:(id<SCKEvent>)e {
     NSString *who = (eM == _weekEventManager)?@"WeekView":@"DayView";
@@ -320,17 +322,17 @@
     return _dayEndHour;
 }
 
-- (NSInteger)dayCountForTheaterDayView:(SCKTheaterDayView *)tView
-{
-    NSInteger c = 5;
-    if (_showsSaturdays) {
-        c++;
-        if (_showsSundays) {
-            c++;
-        }
-    }
-    return c;
-}
+//- (NSInteger)dayCountForTheaterDayView:(SCKTheaterDayView *)tView
+//{
+//    NSInteger c = 5;
+//    if (_showsSaturdays) {
+//        c++;
+//        if (_showsSundays) {
+//            c++;
+//        }
+//    }
+//    return c;
+//}
 
 #pragma mark - SCKTheaterDayViewDataSource
 
